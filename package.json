@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "vite dev --host 0.0.0.0 --port 12944",
     "build": "tsc -b && vite build",
+    "deploy": "tcb hosting deploy dist -e xiao-hei-bai-meow-9e1j2j319afb88",
     "preview": "vite preview",
     "lint": "eslint --max-warnings=0 . --fix",
     "prettier": "prettier -w --ignore-unknown .",

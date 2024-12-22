@@ -1,4 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import React from 'react';
 import { Toaster } from 'react-hot-toast';
 import { RouterProvider, createBrowserRouter, Outlet } from 'react-router-dom';
 
@@ -40,7 +41,9 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Toaster />
-      <RouterProvider router={router}></RouterProvider>
+      <React.Suspense fallback={<div></div>}>
+        <RouterProvider router={router}></RouterProvider>
+      </React.Suspense>
     </QueryClientProvider>
   );
 }

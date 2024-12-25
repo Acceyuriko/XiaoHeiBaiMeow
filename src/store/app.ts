@@ -1,11 +1,11 @@
 import { create } from 'zustand';
 
 export interface AppState {
-  someState: string;
-  setSomeState: (state: string) => void;
+  loading: boolean;
+  setLoading: (state: boolean) => void;
 }
 
 export const useAppStore = create<AppState>()((set) => ({
-  someState: '',
-  setSomeState: (state) => set({ someState: state }),
+  loading: true,
+  setLoading: (state) => set({ loading: state }),
 }));

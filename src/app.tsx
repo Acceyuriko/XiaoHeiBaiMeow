@@ -1,7 +1,9 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import React from 'react';
 import { Toaster } from 'react-hot-toast';
 import { RouterProvider, createBrowserRouter, Outlet } from 'react-router-dom';
+
+import { useAppStore } from './store/app';
+import { CatLoading } from '@/components/cat-loading';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -28,6 +30,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
+        index: true,
         lazy: async () => {
           const { Home } = await import('@/pages/home');
           return { Component: Home };
@@ -38,12 +41,13 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  const { loading } = useAppStore();
+
   return (
     <QueryClientProvider client={queryClient}>
       <Toaster />
-      <React.Suspense fallback={<div></div>}>
-        <RouterProvider router={router}></RouterProvider>
-      </React.Suspense>
+      {loading && <CatLoading />}
+      <RouterProvider router={router}></RouterProvider>
     </QueryClientProvider>
   );
 }

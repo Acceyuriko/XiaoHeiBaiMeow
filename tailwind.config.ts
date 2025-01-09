@@ -37,6 +37,7 @@ const config: Config = {
       'loading-cat': '2.74s linear infinite loading-cat',
       'loading-cat-body': '2.74s linear infinite loading-cat-body',
       'loading-cat-foot': '2.74s linear infinite loading-cat-foot',
+      'image-animation': '36s linear infinite image-animation',
     },
     keyframes: {
       'loading-cat': {
@@ -68,6 +69,29 @@ const config: Config = {
         '50%': { transform: 'rotate(-195deg)' },
         '70%': { transform: 'rotate(-165deg)' },
         '100%': { transform: 'rotate(-10deg)' },
+      },
+      'image-animation': {
+        '0%': {
+          opacity: '0',
+          'animation-timing-function': 'ease-in',
+        },
+        '2%': {
+          opacity: '1',
+        },
+        '8%': {
+          opacity: '1',
+          transform: 'scale(1.05)',
+          'animation-timing-function': 'ease-out',
+        },
+        '17%': {
+          opacity: '1',
+          transform: 'scale(1.1)',
+        },
+        '25%': {
+          opacity: '0',
+          transform: 'scale(1.1)',
+        },
+        '100%': { opacity: '0' },
       },
     },
   },

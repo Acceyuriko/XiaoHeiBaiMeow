@@ -5,6 +5,7 @@ import { RouterProvider, createBrowserRouter, Outlet } from 'react-router-dom';
 
 import { useAppStore } from './store/app';
 import { CatLoading } from '@/components/cat-loading';
+import { Header } from '@/components/header';
 
 initMouseFirework({
   excludeElements: ['a'],
@@ -62,7 +63,12 @@ const queryClient = new QueryClient({
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Outlet />,
+    element: (
+      <>
+        <Header />
+        <Outlet />,
+      </>
+    ),
     children: [
       {
         path: '/',
@@ -82,8 +88,12 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Toaster />
-      {loading && <CatLoading />}
       <RouterProvider router={router}></RouterProvider>
+      {loading && (
+        <div className="fixed bottom-0 left-0 right-0 top-0 z-50 bg-grey-1">
+          <CatLoading />
+        </div>
+      )}
     </QueryClientProvider>
   );
 }

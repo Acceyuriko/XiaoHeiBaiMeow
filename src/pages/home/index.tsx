@@ -6,9 +6,7 @@ export const Home = () => {
   const { setLoading } = useAppStore();
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
+    setLoading(false);
   }, [setLoading]);
 
   return <div className="">Home</div>;

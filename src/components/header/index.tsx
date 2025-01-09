@@ -1,6 +1,7 @@
+import { useQuery } from '@tanstack/react-query';
 import clsx from 'classnames';
 import { shuffle } from 'lodash';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import Cover1 from '@/assets/covers/cover_1.jpg';
@@ -29,7 +30,6 @@ import Cover3 from '@/assets/covers/cover_3.jpg';
 import Cover30 from '@/assets/covers/cover_30.jpg';
 import Cover31 from '@/assets/covers/cover_31.jpg';
 import Cover32 from '@/assets/covers/cover_32.jpg';
-import Cover33 from '@/assets/covers/cover_33.jpg';
 import Cover34 from '@/assets/covers/cover_34.jpg';
 import Cover35 from '@/assets/covers/cover_35.jpg';
 import Cover36 from '@/assets/covers/cover_36.jpg';
@@ -40,55 +40,78 @@ import Cover6 from '@/assets/covers/cover_6.jpg';
 import Cover7 from '@/assets/covers/cover_7.jpg';
 import Cover8 from '@/assets/covers/cover_8.jpg';
 import Cover9 from '@/assets/covers/cover_9.jpg';
+import CoverHelmet from '@/assets/covers/cover_helmet.jpg';
+import { useAppStore } from '@/store/app';
 
 const BASE_DURATION = 6;
 
 export const Header = () => {
   const location = useLocation();
+  const { setLoading } = useAppStore();
 
-  const covers = useMemo(() => {
-    console.log('pathname', location.pathname);
+  const {
+    data: covers,
+    isFetching,
+    isPending,
+  } = useQuery({
+    queryKey: ['listCovers', location.pathname],
+    queryFn: async () => {
+      let randomed = [CoverHelmet].concat(
+        shuffle([
+          Cover1,
+          Cover2,
+          Cover3,
+          Cover4,
+          Cover5,
+          Cover6,
+          Cover7,
+          Cover8,
+          Cover9,
+          Cover10,
+          Cover11,
+          Cover12,
+          Cover13,
+          Cover14,
+          Cover15,
+          Cover16,
+          Cover17,
+          Cover18,
+          Cover19,
+          Cover20,
+          Cover21,
+          Cover22,
+          Cover23,
+          Cover24,
+          Cover25,
+          Cover26,
+          Cover27,
+          Cover28,
+          Cover29,
+          Cover30,
+          Cover31,
+          Cover32,
+          Cover34,
+          Cover35,
+          Cover36,
+          Cover37,
+        ]).slice(0, 5),
+      );
 
-    return shuffle([
-      Cover1,
-      Cover2,
-      Cover3,
-      Cover4,
-      Cover5,
-      Cover6,
-      Cover7,
-      Cover8,
-      Cover9,
-      Cover10,
-      Cover11,
-      Cover12,
-      Cover13,
-      Cover14,
-      Cover15,
-      Cover16,
-      Cover17,
-      Cover18,
-      Cover19,
-      Cover20,
-      Cover21,
-      Cover22,
-      Cover23,
-      Cover24,
-      Cover25,
-      Cover26,
-      Cover27,
-      Cover28,
-      Cover29,
-      Cover30,
-      Cover31,
-      Cover32,
-      Cover33,
-      Cover34,
-      Cover35,
-      Cover36,
-      Cover37,
-    ]).slice(0, 6);
-  }, [location.pathname]);
+      randomed = shuffle(randomed);
+
+      await Promise.all(
+        randomed.map((url) => {
+          return new Promise((resolve) => {
+            const img = new Image();
+            img.onload = resolve;
+            img.src = url;
+          });
+        }),
+      );
+
+      return randomed;
+    },
+  });
 
   const menus = useMemo(() => {
     return [
@@ -120,6 +143,14 @@ export const Header = () => {
     ];
   }, []);
 
+  useEffect(() => {
+    if (isPending || isFetching) {
+      setLoading(true);
+    } else {
+      setLoading(false);
+    }
+  }, [setLoading, isPending, isFetching]);
+
   return (
     <div
       className="header relative mx-auto my-0 h-[50vh] w-full text-grey-0 dark:text-grey-9"
@@ -128,7 +159,14 @@ export const Header = () => {
       }}
     >
       <div className="inner mx-auto my-0 w-full">
-        <div className="brand"></div>
+        <div className="brand fixed flex h-[50vh] min-h-[10rem] w-full flex-col items-center justify-center px-12 text-center">
+          <div className="flex flex-col items-center justify-center">
+            <div className="my-2.5 text-[1.5em] font-bold leading-normal tracking-[0.125rem] md:text-[2.5em]">
+              江江酱酱の装修日记
+            </div>
+            <div className="m-0 text-[0.75em] md:text-[0.8125em]">= 得道多助，失道寡助 =</div>
+          </div>
+        </div>
         <div className="nav fixed h-[3.125rem] w-full transition-all delay-0 duration-200 ease-in-out">
           <div className="inner mx-auto my-0 flex h-full w-[calc(100%-0.625rem)] flex-nowrap">
             <div className="toggle flex cursor-pointer flex-col items-center justify-center leading-[0]">
@@ -171,11 +209,11 @@ export const Header = () => {
       </div>
       <div className="imgs fixed left-0 top-0 -z-50 h-[70vh] min-h-[25rem] w-full bg-[#363636]">
         <ul>
-          {covers.map((url, index) => {
+          {covers?.map((url, index) => {
             return (
               <li
                 key={url + index}
-                className="animate-image-animation absolute left-0 top-0 h-full w-full"
+                className="absolute left-0 top-0 h-full w-full animate-image-animation"
                 style={{
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',

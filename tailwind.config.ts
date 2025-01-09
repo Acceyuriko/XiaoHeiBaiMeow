@@ -38,6 +38,7 @@ const config: Config = {
       'loading-cat-body': '2.74s linear infinite loading-cat-body',
       'loading-cat-foot': '2.74s linear infinite loading-cat-foot',
       'image-animation': '36s linear infinite image-animation',
+      wave: '25s cubic-bezier(.55, .5, .45, .5) infinite wave',
     },
     keyframes: {
       'loading-cat': {
@@ -92,6 +93,14 @@ const config: Config = {
           transform: 'scale(1.1)',
         },
         '100%': { opacity: '0' },
+      },
+      wave: {
+        '0%': {
+          transform: 'translate3d(-90px, 0, 0)',
+        },
+        '100%': {
+          transform: 'translate3d(85px, 0, 0)',
+        },
       },
     },
   },

@@ -6,6 +6,7 @@ import { RouterProvider, createBrowserRouter, Outlet } from 'react-router-dom';
 import { useAppStore } from './store/app';
 import { CatLoading } from '@/components/cat-loading';
 import { Header } from '@/components/header';
+import { Waves } from '@/components/waves';
 
 initMouseFirework({
   excludeElements: ['a'],
@@ -66,6 +67,7 @@ const router = createBrowserRouter([
     element: (
       <>
         <Header />
+        <Waves />
         <Outlet />,
       </>
     ),

@@ -1,10 +1,10 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import initMouseFirework from 'mouse-firework';
+import { useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
-import { RouterProvider, createBrowserRouter, Outlet } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter, Outlet } from 'react-router';
 
 import { useAppStore } from './store/app';
-import { CatLoading } from '@/components/cat-loading';
 import { Header } from '@/components/header';
 import { Waves } from '@/components/waves';
 
@@ -71,6 +71,7 @@ const router = createBrowserRouter([
         <Outlet />,
       </>
     ),
+    hydrateFallbackElement: <></>,
     children: [
       {
         path: '/',
@@ -87,15 +88,18 @@ const router = createBrowserRouter([
 function App() {
   const { loading } = useAppStore();
 
+  useEffect(() => {
+    const ele = document.querySelector('#loading');
+    if (!ele) {
+      return;
+    }
+    (ele as HTMLDivElement).style.display = loading ? 'block' : 'none';
+  }, [loading]);
+
   return (
     <QueryClientProvider client={queryClient}>
       <Toaster />
       <RouterProvider router={router}></RouterProvider>
-      {loading && (
-        <div className="fixed bottom-0 left-0 right-0 top-0 z-50 bg-grey-1">
-          <CatLoading />
-        </div>
-      )}
     </QueryClientProvider>
   );
 }

@@ -2,48 +2,55 @@ import { useQuery } from '@tanstack/react-query';
 import clsx from 'classnames';
 import { shuffle } from 'lodash';
 import { useEffect, useMemo } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router';
 
-import Cover1 from '@/assets/covers/cover_1.jpg';
-import Cover10 from '@/assets/covers/cover_10.jpg';
-import Cover11 from '@/assets/covers/cover_11.jpg';
-import Cover12 from '@/assets/covers/cover_12.jpg';
-import Cover13 from '@/assets/covers/cover_13.jpg';
-import Cover14 from '@/assets/covers/cover_14.jpg';
-import Cover15 from '@/assets/covers/cover_15.jpg';
-import Cover16 from '@/assets/covers/cover_16.jpg';
-import Cover17 from '@/assets/covers/cover_17.jpg';
-import Cover18 from '@/assets/covers/cover_18.jpg';
-import Cover19 from '@/assets/covers/cover_19.jpg';
-import Cover2 from '@/assets/covers/cover_2.jpg';
-import Cover20 from '@/assets/covers/cover_20.jpg';
-import Cover21 from '@/assets/covers/cover_21.jpg';
-import Cover22 from '@/assets/covers/cover_22.jpg';
-import Cover23 from '@/assets/covers/cover_23.jpg';
-import Cover24 from '@/assets/covers/cover_24.jpg';
-import Cover25 from '@/assets/covers/cover_25.jpg';
-import Cover26 from '@/assets/covers/cover_26.jpg';
-import Cover27 from '@/assets/covers/cover_27.jpg';
-import Cover28 from '@/assets/covers/cover_28.jpg';
-import Cover29 from '@/assets/covers/cover_29.jpg';
-import Cover3 from '@/assets/covers/cover_3.jpg';
-import Cover30 from '@/assets/covers/cover_30.jpg';
-import Cover31 from '@/assets/covers/cover_31.jpg';
-import Cover32 from '@/assets/covers/cover_32.jpg';
-import Cover34 from '@/assets/covers/cover_34.jpg';
-import Cover35 from '@/assets/covers/cover_35.jpg';
-import Cover36 from '@/assets/covers/cover_36.jpg';
-import Cover37 from '@/assets/covers/cover_37.jpg';
-import Cover4 from '@/assets/covers/cover_4.jpg';
-import Cover5 from '@/assets/covers/cover_5.jpg';
-import Cover6 from '@/assets/covers/cover_6.jpg';
-import Cover7 from '@/assets/covers/cover_7.jpg';
-import Cover8 from '@/assets/covers/cover_8.jpg';
-import Cover9 from '@/assets/covers/cover_9.jpg';
-import CoverHelmet from '@/assets/covers/cover_helmet.jpg';
+import AboutCover1 from './assets/covers/about_cover_1.jpg';
+import AboutCover2 from './assets/covers/about_cover_2.jpg';
+import AboutCover3 from './assets/covers/about_cover_3.jpg';
+import AboutCover4 from './assets/covers/about_cover_4.jpg';
+import AboutCover5 from './assets/covers/about_cover_5.jpg';
+import AboutCover6 from './assets/covers/about_cover_6.jpg';
+import Cover1 from './assets/covers/cover_1.jpg';
+import Cover10 from './assets/covers/cover_10.jpg';
+import Cover11 from './assets/covers/cover_11.jpg';
+import Cover12 from './assets/covers/cover_12.jpg';
+import Cover13 from './assets/covers/cover_13.jpg';
+import Cover14 from './assets/covers/cover_14.jpg';
+import Cover15 from './assets/covers/cover_15.jpg';
+import Cover16 from './assets/covers/cover_16.jpg';
+import Cover17 from './assets/covers/cover_17.jpg';
+import Cover18 from './assets/covers/cover_18.jpg';
+import Cover19 from './assets/covers/cover_19.jpg';
+import Cover2 from './assets/covers/cover_2.jpg';
+import Cover20 from './assets/covers/cover_20.jpg';
+import Cover21 from './assets/covers/cover_21.jpg';
+import Cover22 from './assets/covers/cover_22.jpg';
+import Cover23 from './assets/covers/cover_23.jpg';
+import Cover24 from './assets/covers/cover_24.jpg';
+import Cover25 from './assets/covers/cover_25.jpg';
+import Cover26 from './assets/covers/cover_26.jpg';
+import Cover27 from './assets/covers/cover_27.jpg';
+import Cover28 from './assets/covers/cover_28.jpg';
+import Cover29 from './assets/covers/cover_29.jpg';
+import Cover3 from './assets/covers/cover_3.jpg';
+import Cover30 from './assets/covers/cover_30.jpg';
+import Cover31 from './assets/covers/cover_31.jpg';
+import Cover32 from './assets/covers/cover_32.jpg';
+import Cover34 from './assets/covers/cover_34.jpg';
+import Cover35 from './assets/covers/cover_35.jpg';
+import Cover36 from './assets/covers/cover_36.jpg';
+import Cover37 from './assets/covers/cover_37.jpg';
+import Cover4 from './assets/covers/cover_4.jpg';
+import Cover5 from './assets/covers/cover_5.jpg';
+import Cover6 from './assets/covers/cover_6.jpg';
+import Cover7 from './assets/covers/cover_7.jpg';
+import Cover8 from './assets/covers/cover_8.jpg';
+import Cover9 from './assets/covers/cover_9.jpg';
+import CoverHelmet from './assets/covers/cover_helmet.jpg';
+import Title from './assets/title.png';
 import { useAppStore } from '@/store/app';
 
-const BASE_DURATION = 6;
+const BASE_DURATION = 3;
 
 export const Header = () => {
   const location = useLocation();
@@ -56,46 +63,51 @@ export const Header = () => {
   } = useQuery({
     queryKey: ['listCovers', location.pathname],
     queryFn: async () => {
-      let randomed = [CoverHelmet].concat(
-        shuffle([
-          Cover1,
-          Cover2,
-          Cover3,
-          Cover4,
-          Cover5,
-          Cover6,
-          Cover7,
-          Cover8,
-          Cover9,
-          Cover10,
-          Cover11,
-          Cover12,
-          Cover13,
-          Cover14,
-          Cover15,
-          Cover16,
-          Cover17,
-          Cover18,
-          Cover19,
-          Cover20,
-          Cover21,
-          Cover22,
-          Cover23,
-          Cover24,
-          Cover25,
-          Cover26,
-          Cover27,
-          Cover28,
-          Cover29,
-          Cover30,
-          Cover31,
-          Cover32,
-          Cover34,
-          Cover35,
-          Cover36,
-          Cover37,
-        ]).slice(0, 5),
-      );
+      let randomed: string[] = [];
+      if (/^\/about/.test(location.pathname)) {
+        randomed = [AboutCover1, AboutCover2, AboutCover3, AboutCover4, AboutCover5, AboutCover6];
+      } else {
+        randomed = [CoverHelmet].concat(
+          shuffle([
+            Cover1,
+            Cover2,
+            Cover3,
+            Cover4,
+            Cover5,
+            Cover6,
+            Cover7,
+            Cover8,
+            Cover9,
+            Cover10,
+            Cover11,
+            Cover12,
+            Cover13,
+            Cover14,
+            Cover15,
+            Cover16,
+            Cover17,
+            Cover18,
+            Cover19,
+            Cover20,
+            Cover21,
+            Cover22,
+            Cover23,
+            Cover24,
+            Cover25,
+            Cover26,
+            Cover27,
+            Cover28,
+            Cover29,
+            Cover30,
+            Cover31,
+            Cover32,
+            Cover34,
+            Cover35,
+            Cover36,
+            Cover37,
+          ]).slice(0, 5),
+        );
+      }
 
       randomed = shuffle(randomed);
 
@@ -161,10 +173,10 @@ export const Header = () => {
       <div className="inner mx-auto my-0 w-full">
         <div className="brand fixed flex h-[50vh] min-h-[10rem] w-full flex-col items-center justify-center px-12 text-center">
           <div className="flex flex-col items-center justify-center">
-            <div className="my-2.5 text-[1.5em] font-bold leading-normal tracking-[0.125rem] md:text-[2.5em]">
-              江江酱酱の装修日记
+            <div className="my-2.5">
+              <img src={Title} alt="江江の装修日记" className="" />
             </div>
-            <div className="m-0 text-[0.75em] md:text-[0.8125em]">= 得道多助，失道寡助 =</div>
+            <div className="m-0 text-[0.75em] md:text-[0.8125em]">= 得道者多助，失道者寡助 =</div>
           </div>
         </div>
         <div className="nav fixed h-[3.125rem] w-full transition-all delay-0 duration-200 ease-in-out">

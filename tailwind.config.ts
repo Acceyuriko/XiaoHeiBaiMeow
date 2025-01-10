@@ -32,12 +32,18 @@ const config: Config = {
       'pink-light-a3': 'var(--color-pink-light-a3)',
       'pink-light-a5': 'var(--color-pink-light-a5)',
       'pink-light-a7': 'var(--color-pink-light-a7)',
+      'cat-loading': {
+        'body-color': 'var(--color-cat-body)',
+        tail: 'var(--color-cat-tail)',
+        tummy: 'var(--color-cat-tummy)',
+        border: 'var(--color-cat-border)',
+      },
     },
     animation: {
       'loading-cat': '2.74s linear infinite loading-cat',
       'loading-cat-body': '2.74s linear infinite loading-cat-body',
       'loading-cat-foot': '2.74s linear infinite loading-cat-foot',
-      'image-animation': '36s linear infinite image-animation',
+      'image-animation': '18s linear infinite image-animation',
       wave: '25s cubic-bezier(.55, .5, .45, .5) infinite wave',
     },
     keyframes: {
@@ -101,6 +107,18 @@ const config: Config = {
         '100%': {
           transform: 'translate3d(85px, 0, 0)',
         },
+      },
+    },
+    extend: {
+      backgroundImage: {
+        'cat-loading-headfoot': 'var(--bg-cat-head-foot)',
+        'cat-loading-body': `var(--bg-cat-body)`,
+        'cat-loading-head-after': `var(--bg-cat-head-after)`,
+      },
+      spacing: {
+        'cat-loading-outer-r': 'var(--size-cat-outer-r)',
+        'cat-loading-tummy-w': 'var(--size-cat-tummy-w)',
+        'cat-loading-border-w': 'var(--size-cat-border-w)',
       },
     },
   },

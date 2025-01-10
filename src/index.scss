@@ -32,6 +32,98 @@
     --color-pink-light-a7: rgba(255, 230, 250, 0.7);
     --body-bg-shadow: rgb(var(--color-grey-2));
 
+    --color-cat-border: rgb(56, 60, 75);
+    --color-cat-body: rgb(237, 166, 93);
+    --color-cat-tail: rgb(198, 130, 59);
+    --color-cat-tummy: rgb(242, 192, 137);
+
+    --bg-cat-head-foot: radial-gradient(
+      transparent 0%,
+      transparent 35%,
+      var(--color-cat-border) 35%,
+      var(--color-cat-border) 39%,
+      var(--color-cat-body) 39%,
+      var(--color-cat-body) 67%,
+      var(--color-cat-border) 67%,
+      var(--color-cat-border) 100%
+    );
+    --bg-cat-body: radial-gradient(
+      transparent 0%,
+      transparent 35%,
+      var(--color-cat-border) 35%,
+      var(--color-cat-border) 39%,
+      var(--color-cat-body) 39%,
+      var(--color-cat-body) 46%,
+      var(--color-cat-tummy) 46%,
+      var(--color-cat-tummy) 60%,
+      var(--color-cat-body) 60%,
+      var(--color-cat-body) 67%,
+      var(--color-cat-border) 67%,
+      var(--color-cat-border) 100%
+    );
+    --bg-cat-head-after: linear-gradient(rgb(var(--color-grey-1)) 65%, transparent 65%),
+      radial-gradient(
+        rgb(var(--color-grey-1)) 51%,
+        var(--color-cat-border) 55%,
+        var(--color-cat-border) 68%,
+        transparent 70%
+      );
+    --bg-cat-face: radial-gradient(
+          circle,
+          var(--color-cat-tummy) 0%,
+          var(--color-cat-tummy) 23%,
+          transparent 23%
+        ) -0.1875em 1.0625em no-repeat,
+      radial-gradient(
+          circle,
+          var(--color-cat-border) 0%,
+          var(--color-cat-border) 6%,
+          transparent 6%
+        )
+        0.75em -0.75em no-repeat,
+      radial-gradient(
+          circle,
+          var(--color-cat-border) 0%,
+          var(--color-cat-border) 6%,
+          transparent 6%
+        ) -0.75em -0.75em no-repeat,
+      radial-gradient(var(--color-cat-body) 0%, var(--color-cat-body) 15%, transparent 15%) 0 -0.6875em
+        no-repeat,
+      radial-gradient(
+          circle,
+          transparent 5%,
+          var(--color-cat-border) 5%,
+          var(--color-cat-border) 10%,
+          transparent 10%
+        ) -0.1875em -0.3125em no-repeat,
+      radial-gradient(
+          circle,
+          transparent 5%,
+          var(--color-cat-border) 5%,
+          var(--color-cat-border) 10%,
+          transparent 10%
+        )
+        0.1875em -0.3125em no-repeat,
+      radial-gradient(circle, var(--color-cat-body) 45%, transparent 45%) 0 -0.1875em,
+      linear-gradient(
+        transparent 35%,
+        var(--color-cat-border) 35%,
+        var(--color-cat-border) 41%,
+        transparent 41%,
+        transparent 44%,
+        var(--color-cat-border) 44%,
+        var(--color-cat-border) 50%,
+        transparent 50%,
+        transparent 53%,
+        var(--color-cat-border) 53%,
+        var(--color-cat-border) 59%,
+        transparent 59%
+      );
+
+    --size-cat-outer-r: 15em;
+    --size-cat-tummy-w: 1.5em;
+    --size-cat-border-w: 0.375em;
+
     // .primary {
     //   --note-border: #cda0c7;
     //   --note-bg: #fdf8ff;

@@ -1,8 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import clsx from 'classnames';
-import { shuffle } from 'lodash';
-import { useEffect, useMemo } from 'react';
-import { Link, useLocation } from 'react-router';
+import { shuffle, throttle } from 'lodash';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router';
+import anime from 'theme-shokax-anime';
 
 import AboutCover1 from './assets/covers/about_cover_1.jpg';
 import AboutCover2 from './assets/covers/about_cover_2.jpg';
@@ -54,7 +55,13 @@ const BASE_DURATION = 3;
 
 export const Header = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { setLoading } = useAppStore();
+
+  const [scrollDirection, setScrollDirection] = useState<'up' | 'down'>('down');
+  const [isNavVisible, setIsNavVisible] = useState(false);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const preScrollTop = useRef(0);
 
   const {
     data: covers,
@@ -156,6 +163,26 @@ export const Header = () => {
   }, []);
 
   useEffect(() => {
+    const onScroll = throttle(() => {
+      const scrollTop = document.documentElement.scrollTop;
+      if (scrollTop - preScrollTop.current > 0) {
+        setScrollDirection('down');
+      } else {
+        setScrollDirection('up');
+      }
+      if (headerRef.current) {
+        setIsNavVisible(scrollTop > headerRef.current.offsetHeight);
+      }
+      preScrollTop.current = scrollTop;
+    }, 100);
+
+    window.addEventListener('scroll', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, []);
+
+  useEffect(() => {
     if (isPending || isFetching) {
       setLoading(true);
     } else {
@@ -165,6 +192,7 @@ export const Header = () => {
 
   return (
     <div
+      ref={headerRef}
       className="header relative mx-auto my-0 h-[50vh] w-full text-grey-0 dark:text-grey-9"
       style={{
         textShadow: '0 0.2rem 0.3rem rgba(0, 0, 0, 0.5)',
@@ -174,22 +202,36 @@ export const Header = () => {
         <div className="brand fixed flex h-[50vh] min-h-[10rem] w-full flex-col items-center justify-center px-12 text-center">
           <div className="flex flex-col items-center justify-center">
             <div className="my-2.5">
-              <img src={Title} alt="江江の装修日记" className="" />
+              <img src={Title} alt="江江の装修日记" className="max-h-20" />
             </div>
             <div className="m-0 text-[0.75em] md:text-[0.8125em]">= 得道者多助，失道者寡助 =</div>
           </div>
         </div>
-        <div className="nav fixed h-[3.125rem] w-full transition-all delay-0 duration-200 ease-in-out">
+        <div
+          className={clsx(
+            'nav fixed z-10 h-[3.125rem] w-full transition-all delay-0 duration-200 ease-in-out',
+            isNavVisible
+              ? 'bg-nav-bg text-grey-7 shadow-[0.1rem_0.1rem_0.2rem_rgb(var(--color-grey-9)/0.1)] [text-shadow:0_0_0.0625rem_rgb(var(--color-grey-9)/0.1)] dark:text-grey-5'
+              : '',
+            isNavVisible
+              ? scrollDirection === 'up'
+                ? 'translate-y-0'
+                : 'translate-y-[-100%]'
+              : '',
+          )}
+        >
           <div className="inner mx-auto my-0 flex h-full w-[calc(100%-0.625rem)] flex-nowrap">
             <div className="toggle flex cursor-pointer flex-col items-center justify-center leading-[0]">
               <div className="lines w-[1.375rem] p-5" style={{ boxSizing: 'unset' }}>
                 {new Array(3).fill(0).map((_, index) => (
                   <span
                     key={index}
-                    className="relative left-0 top-0 mt-[0.1875rem] inline-block h-0.5 w-full rounded-[0.0625rem] bg-grey-0 align-top transition-all duration-[400ms] dark:bg-grey-9"
-                    style={{
-                      boxShadow: '0 0 0.5rem rgba(0,0,0,.5)',
-                    }}
+                    className={clsx(
+                      'relative left-0 top-0 mt-[0.1875rem] inline-block h-0.5 w-full rounded-[0.0625rem] align-top transition-all duration-[400ms]',
+                      isNavVisible
+                        ? 'bg-grey-7 shadow-[0_0_0.0625rem_rgb(var(--color-grey-9)/0.1)] dark:bg-grey-5'
+                        : 'bg-grey-0 shadow-[0_0_0.5rem_rgba(0,0,0,0.5)] dark:bg-grey-9',
+                    )}
                   />
                 ))}
               </div>
@@ -200,13 +242,25 @@ export const Header = () => {
                   <li
                     key={index}
                     className={clsx(
-                      'relative px-2.5 text-center tracking-[0.0625rem]',
+                      'relative cursor-pointer px-2.5 text-center tracking-[0.0625rem]',
                       index > 0 ? 'hidden md:inline-block' : 'block md:inline-block',
                     )}
+                    onClick={() => {
+                      if (menu.href) {
+                        if (menu.href === location.pathname) {
+                          anime({
+                            targets: document.documentElement,
+                            duration: 500,
+                            easing: 'easeInOutQuad',
+                            scrollTop: 0,
+                          }).play();
+                        } else {
+                          navigate(menu.href);
+                        }
+                      }
+                    }}
                   >
-                    <Link to={menu.href} className="">
-                      {menu.title}
-                    </Link>
+                    {menu.title}
                   </li>
                 );
               })}

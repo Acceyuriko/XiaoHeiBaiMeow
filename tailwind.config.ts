@@ -114,6 +114,7 @@ const config: Config = {
         'cat-loading-headfoot': 'var(--bg-cat-head-foot)',
         'cat-loading-body': `var(--bg-cat-body)`,
         'cat-loading-head-after': `var(--bg-cat-head-after)`,
+        'nav-bg': `linear-gradient(-225deg, var(--color-cyan-light) 0, var(--color-pink-light) 100%)`,
       },
       spacing: {
         'cat-loading-outer-r': 'var(--size-cat-outer-r)',

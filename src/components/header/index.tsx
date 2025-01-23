@@ -49,6 +49,7 @@ import Cover8 from './assets/covers/cover_8.jpg';
 import Cover9 from './assets/covers/cover_9.jpg';
 import CoverHelmet from './assets/covers/cover_helmet.jpg';
 import Title from './assets/title.png';
+import { ThemeNeko } from './components/theme-neko';
 import { useAppStore } from '@/store/app';
 
 const BASE_DURATION = 3;
@@ -266,9 +267,7 @@ export const Header = () => {
               })}
             </ul>
             <ul className="right inline-flex items-center justify-center">
-              <li className="cursor-pointer px-2 py-2.5">
-                <i className="ic i-sun" />
-              </li>
+              <ThemeNeko />
             </ul>
           </div>
         </div>

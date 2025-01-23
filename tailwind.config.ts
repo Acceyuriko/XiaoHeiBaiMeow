@@ -45,6 +45,8 @@ const config: Config = {
       'loading-cat-foot': '2.74s linear infinite loading-cat-foot',
       'image-animation': '18s linear infinite image-animation',
       wave: '25s cubic-bezier(.55, .5, .45, .5) infinite wave',
+      'theme-neko-rotate': 'rotate 2s cubic-bezier(.7, 0, 0, 1)',
+      'slide-up-big-in': 'slide-up-big-in 0.5s',
     },
     keyframes: {
       'loading-cat': {
@@ -106,6 +108,26 @@ const config: Config = {
         },
         '100%': {
           transform: 'translate3d(85px, 0, 0)',
+        },
+      },
+      rotate: {
+        from: {
+          transform: 'rotate(0)',
+        },
+
+        to: {
+          transform: 'rotate(360deg)',
+        },
+      },
+      'slide-up-big-in': {
+        from: {
+          opacity: '0',
+          transform: 'translateY(80px)',
+        },
+
+        to: {
+          opacity: '1',
+          transform: 'translateY(0)',
         },
       },
     },

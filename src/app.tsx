@@ -2,11 +2,10 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import initMouseFirework from 'mouse-firework';
 import { useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
-import { RouterProvider, createBrowserRouter, Outlet } from 'react-router';
+import { RouterProvider, createBrowserRouter } from 'react-router';
 
+import { Layout } from './layout';
 import { useAppStore } from './store/app';
-import { Header } from '@/components/header';
-import { Waves } from '@/components/waves';
 
 initMouseFirework({
   excludeElements: ['a'],
@@ -64,13 +63,7 @@ const queryClient = new QueryClient({
 const router = createBrowserRouter([
   {
     path: '/',
-    element: (
-      <>
-        <Header />
-        <Waves />
-        <Outlet />,
-      </>
-    ),
+    element: <Layout />,
     hydrateFallbackElement: <></>,
     children: [
       {
@@ -79,6 +72,20 @@ const router = createBrowserRouter([
         lazy: async () => {
           const { Home } = await import('@/pages/home');
           return { Component: Home };
+        },
+      },
+      {
+        path: '/about',
+        lazy: async () => {
+          const { About } = await import('@/pages/about');
+          return { Component: About };
+        },
+      },
+      {
+        path: '/archives',
+        lazy: async () => {
+          const { Archives } = await import('@/pages/archives');
+          return { Component: Archives };
         },
       },
     ],

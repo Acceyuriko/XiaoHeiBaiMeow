@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import clsx from 'classnames';
 import { shuffle, throttle } from 'lodash';
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -57,7 +57,7 @@ const BASE_DURATION = 3;
 export const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { setLoading } = useAppStore();
+  const { setLoading, setIsSidebarOpen } = useAppStore();
 
   const [scrollDirection, setScrollDirection] = useState<'up' | 'down'>('down');
   const [isNavVisible, setIsNavVisible] = useState(false);
@@ -163,6 +163,23 @@ export const Header = () => {
     ];
   }, []);
 
+  const { mutateAsync: openSidebar } = useMutation({
+    mutationKey: ['openSidebar'],
+    mutationFn: async () => {
+      setIsSidebarOpen(true);
+      await new Promise<void>((resolve) => {
+        anime({
+          targets: document.querySelector('#sidebar')!,
+          duration: 200,
+          easing: 'linear',
+          translateX: ['100%', '0%'],
+          opacity: [0, 1],
+          complete: () => resolve(),
+        }).play();
+      });
+    },
+  });
+
   useEffect(() => {
     const onScroll = throttle(() => {
       const scrollTop = document.documentElement.scrollTop;
@@ -194,6 +211,7 @@ export const Header = () => {
   return (
     <div
       ref={headerRef}
+      id="header"
       className="header relative mx-auto my-0 h-[50vh] w-full text-grey-0 dark:text-grey-9"
       style={{
         textShadow: '0 0.2rem 0.3rem rgba(0, 0, 0, 0.5)',
@@ -222,7 +240,10 @@ export const Header = () => {
           )}
         >
           <div className="inner mx-auto my-0 flex h-full w-[calc(100%-0.625rem)] flex-nowrap">
-            <div className="toggle flex cursor-pointer flex-col items-center justify-center leading-[0]">
+            <div
+              className="toggle flex cursor-pointer flex-col items-center justify-center leading-[0]"
+              onClick={() => openSidebar()}
+            >
               <div className="lines w-[1.375rem] p-5" style={{ boxSizing: 'unset' }}>
                 {new Array(3).fill(0).map((_, index) => (
                   <span

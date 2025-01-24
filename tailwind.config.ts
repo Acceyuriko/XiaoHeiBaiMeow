@@ -47,6 +47,9 @@ const config: Config = {
       wave: '25s cubic-bezier(.55, .5, .45, .5) infinite wave',
       'theme-neko-rotate': 'rotate 2s cubic-bezier(.7, 0, 0, 1)',
       'slide-up-big-in': 'slide-up-big-in 0.5s',
+      'slide-down-in': 'slide-down-in 0.3s',
+      blur: 'blur 0.8s ease-in-out forwards',
+      shake: 'shake 1s',
     },
     keyframes: {
       'loading-cat': {
@@ -114,7 +117,6 @@ const config: Config = {
         from: {
           transform: 'rotate(0)',
         },
-
         to: {
           transform: 'rotate(360deg)',
         },
@@ -124,10 +126,44 @@ const config: Config = {
           opacity: '0',
           transform: 'translateY(80px)',
         },
-
         to: {
           opacity: '1',
           transform: 'translateY(0)',
+        },
+      },
+      'slide-down-in': {
+        from: {
+          opacity: '0',
+          transform: 'translateY(-18px)',
+        },
+        to: {
+          opacity: '1',
+          transform: 'translateY(0)',
+        },
+      },
+      blur: {
+        from: {
+          filter: 'blur(10px)',
+        },
+        to: {
+          filter: 'blur(0)',
+        },
+      },
+      shake: {
+        '0%': {
+          transform: 'scale(1)',
+        },
+        '10%, 20%': {
+          transform: 'scale(.9) rotate(3deg)',
+        },
+        '30%, 50%, 70%, 90%': {
+          transform: 'scale(1.1) rotate(-3deg)',
+        },
+        '40%, 60%, 80%': {
+          transform: 'scale(1.1) rotate(3deg)',
+        },
+        '100%': {
+          transform: 'scale(1)',
         },
       },
     },

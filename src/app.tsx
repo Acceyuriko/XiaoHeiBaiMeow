@@ -88,6 +88,13 @@ const router = createBrowserRouter([
           return { Component: Archives };
         },
       },
+      {
+        path: '*',
+        lazy: async () => {
+          const { Page404 } = await import('@/pages/404');
+          return { Component: Page404 };
+        },
+      },
     ],
   },
 ]);

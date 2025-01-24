@@ -76,7 +76,7 @@ export const ThemeNeko = () => {
               background: 'linear-gradient(to top, #30cfd0 0%, #330867 100%)',
             }}
           ></div>
-          <div className="planet animate-theme-neko-rotate fixed left-[-50%] top-[-50%] h-[200%] w-[200%] origin-bottom">
+          <div className="planet fixed left-[-50%] top-[-50%] h-[200%] w-[200%] origin-bottom animate-theme-neko-rotate">
             <div
               className="sun absolute left-[55%] top-[32%] h-10 w-10 rounded-full bg-[#ffee94] opacity-100 dark:opacity-0"
               style={{ boxShadow: '0 0 40px #ffee94' }}
@@ -89,7 +89,7 @@ export const ThemeNeko = () => {
             ></div>
           </div>
           <div
-            className="body animate-slide-up-big-in absolute bottom-[-20px] left-[50%] ml-[-100px] h-[140px] w-[135px] bg-[#777] transition-all duration-[250ms] ease-in-out dark:bg-[#444]"
+            className="body absolute bottom-[-20px] left-[50%] ml-[-100px] h-[140px] w-[135px] animate-slide-up-big-in bg-[#777] transition-all duration-[250ms] ease-in-out dark:bg-[#444]"
             style={{
               animationDuration: '1s',
             }}

@@ -1,13 +1,14 @@
 import { useMutation } from '@tanstack/react-query';
 import clsx from 'classnames';
 import { ReactNode, useCallback, useEffect, useMemo, useRef } from 'react';
-import { Link, useLocation } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import anime from 'theme-shokax-anime';
 
 import { useAppStore } from '@/store/app';
 
 export const Sidebar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { isSidebarOpen, setIsSidebarOpen } = useAppStore();
 
   const sidebarRef = useRef<HTMLDivElement>(null);
@@ -246,16 +247,20 @@ export const Sidebar = () => {
                   }}
                   key={nav.name}
                 >
-                  <Link
-                    to={nav.to}
-                    className={clsx('flex items-center justify-center gap-2.5')}
+                  <div
+                    className={clsx('flex cursor-pointer items-center justify-center gap-2.5')}
                     style={{
                       transition: 'all .2s ease-in-out 0s',
+                    }}
+                    onClick={() => {
+                      if (nav.to) {
+                        navigate(nav.to);
+                      }
                     }}
                   >
                     {nav.icon}
                     <span>{nav.name}</span>
-                  </Link>
+                  </div>
                   <div
                     className={clsx(
                       'animate-slide-down-in flex-col items-stretch gap-2.5',
@@ -266,11 +271,16 @@ export const Sidebar = () => {
                       const isActive = item.to === location.pathname;
 
                       return (
-                        <Link
+                        <div
                           key={item.name}
-                          to={item.to}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            if (item.to) {
+                              navigate(item.to);
+                            }
+                          }}
                           className={clsx(
-                            'flex items-center justify-center gap-2.5 rounded-[0.9375rem] leading-[3]',
+                            'flex cursor-pointer items-center justify-center gap-2.5 rounded-[0.9375rem] leading-[3]',
                             isActive
                               ? 'text-grey-0 shadow-[0_0_0.75rem_var(--color-pink-a3)] hover:shadow-[0_0_0.75rem_var(--color-pink)]'
                               : 'text-grey-5 hover:bg-[rgba(0,0,0,0.1)] hover:text-[inherit]',
@@ -287,7 +297,7 @@ export const Sidebar = () => {
                         >
                           {item.icon}
                           <span>{item.name}</span>
-                        </Link>
+                        </div>
                       );
                     })}
                   </div>

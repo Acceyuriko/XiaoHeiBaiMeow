@@ -48,6 +48,7 @@ const config: Config = {
       'theme-neko-rotate': 'rotate 2s cubic-bezier(.7, 0, 0, 1)',
       'slide-up-big-in': 'slide-up-big-in 0.5s',
       'slide-down-in': 'slide-down-in 0.3s',
+      'slide-up-in': 'slide-up-in 0.3s',
       blur: 'blur 0.8s ease-in-out forwards',
       shake: 'shake 1s',
     },
@@ -135,6 +136,16 @@ const config: Config = {
         from: {
           opacity: '0',
           transform: 'translateY(-18px)',
+        },
+        to: {
+          opacity: '1',
+          transform: 'translateY(0)',
+        },
+      },
+      'slide-up-in': {
+        from: {
+          opacity: '0',
+          transform: 'translateY(10px)',
         },
         to: {
           opacity: '1',

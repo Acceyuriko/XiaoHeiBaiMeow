@@ -55,9 +55,9 @@ export const ThemeNeko = () => {
 
   return (
     <>
-      <li className="cursor-pointer px-2 py-2.5" onClick={() => changeTheme()}>
+      <div className="cursor-pointer px-2 py-2.5" onClick={() => changeTheme()}>
         <i className={clsx('ic', isDark ? 'i-moon' : 'i-sun')} />
-      </li>
+      </div>
       {createPortal(
         <div
           id="neko"

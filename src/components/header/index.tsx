@@ -160,6 +160,44 @@ export const Header = () => {
         href: '/about',
         children: [],
       },
+      {
+        title: (
+          <span>
+            <i className="ic i-feather mr-2" />
+            文章
+          </span>
+        ),
+        href: '',
+        children: [
+          {
+            title: (
+              <span>
+                <i className="ic i-list-alt mr-2" />
+                归档
+              </span>
+            ),
+            href: '/archives',
+          },
+          {
+            title: (
+              <span>
+                <i className="ic i-th mr-2" />
+                分类
+              </span>
+            ),
+            href: '/categories',
+          },
+          {
+            title: (
+              <span>
+                <i className="ic i-tags mr-2" />
+                标签
+              </span>
+            ),
+            href: '/tags',
+          },
+        ],
+      },
     ];
   }, []);
 
@@ -241,15 +279,18 @@ export const Header = () => {
         >
           <div className="inner mx-auto my-0 flex h-full w-[calc(100%-0.625rem)] flex-nowrap">
             <div
-              className="toggle flex cursor-pointer flex-col items-center justify-center leading-[0]"
+              className="toggle flex cursor-pointer flex-col items-center justify-center leading-[0] lg:hidden"
               onClick={() => openSidebar()}
             >
-              <div className="lines w-[1.375rem] p-5" style={{ boxSizing: 'unset' }}>
+              <div
+                className="lines flex w-[1.375rem] flex-col gap-[0.1875rem] p-5"
+                style={{ boxSizing: 'unset' }}
+              >
                 {new Array(3).fill(0).map((_, index) => (
                   <span
                     key={index}
                     className={clsx(
-                      'relative left-0 top-0 mt-[0.1875rem] inline-block h-0.5 w-full rounded-[0.0625rem] align-top transition-all duration-[400ms]',
+                      'relative left-0 top-0 inline-block h-0.5 w-full rounded-[0.0625rem] align-top transition-all duration-[400ms]',
                       isNavVisible
                         ? 'bg-grey-7 shadow-[0_0_0.0625rem_rgb(var(--color-grey-9)/0.1)] dark:bg-grey-5'
                         : 'bg-grey-0 shadow-[0_0_0.5rem_rgba(0,0,0,0.5)] dark:bg-grey-9',
@@ -258,14 +299,16 @@ export const Header = () => {
                 ))}
               </div>
             </div>
-            <ul className="menu m-0 w-full px-0 py-2.5">
+            <div className="menu m-0 flex w-full items-center justify-center px-0 py-2.5 md:justify-start">
               {menus.map((menu, index) => {
+                const isActive = menu.href === location.pathname;
+
                 return (
-                  <li
+                  <div
                     key={index}
                     className={clsx(
-                      'relative cursor-pointer px-2.5 text-center tracking-[0.0625rem]',
-                      index > 0 ? 'hidden md:inline-block' : 'block md:inline-block',
+                      'group relative cursor-pointer items-center px-2.5 text-center tracking-[0.0625rem]',
+                      index > 0 ? 'hidden md:flex' : 'flex',
                     )}
                     onClick={() => {
                       if (menu.href) {
@@ -282,14 +325,82 @@ export const Header = () => {
                       }
                     }}
                   >
+                    {index > 0 && (
+                      <div
+                        className={clsx(
+                          'absolute bottom-0 left-[50%] h-[0.1875rem] w-0 translate-x-[-50%] rounded-sm bg-[currentColor]',
+                          isActive
+                            ? 'w-[70%]'
+                            : menu.children.length == 0
+                              ? 'group-hover:w-[70%]'
+                              : '',
+                        )}
+                        style={{
+                          transition: 'all .4s ease-in-out 0s',
+                        }}
+                      />
+                    )}
                     {menu.title}
-                  </li>
+                    {menu.children.length > 0 && (
+                      <>
+                        <div className="ml-[0.3rem] mt-[0.4rem] inline-block border-[0.3rem] border-[transparent] border-t-[currentColor] align-middle"></div>
+                        <div className="absolute left-0 top-0">
+                          <div
+                            className="animate-slide-up-in ml-2.5 mt-10 hidden w-max flex-col overflow-hidden p-0 group-hover:flex"
+                            style={{
+                              backgroundColor: isNavVisible
+                                ? 'rgb(var(--color-grey-1))'
+                                : 'rgb(var(--color-grey-9) / 0.5)',
+                              boxShadow: '0 .3125rem 1.25rem -.25rem var(--grey-9-a1)',
+                              borderRadius: '0.625rem 0',
+                            }}
+                          >
+                            {menu.children.map((item) => {
+                              const isActive = item.href === location.pathname;
+                              return (
+                                <div
+                                  key={item.href}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    navigate(item.href);
+                                  }}
+                                  className={clsx(
+                                    'group/item flex h-11 items-center justify-center px-6',
+                                    isActive
+                                      ? clsx(
+                                          'text-grey-0',
+                                          'shadow-[0_0_0.75rem_var(--color-pink-a3)]',
+                                          '[background:linear-gradient(to_right,var(--color-pink)_0,var(--color-orange)_100%)]',
+                                        )
+                                      : clsx(
+                                          'hover:text-grey-0',
+                                          'hover:shadow-[0_0_0.75rem_var(--color-pink-a3)]',
+                                          'hover:[background:linear-gradient(to_right,var(--color-pink)_0,var(--color-orange)_100%)]',
+                                        ),
+                                  )}
+                                >
+                                  <div
+                                    className="group-hover/item:translate-x-[0.3rem]"
+                                    style={{
+                                      transition: 'all .2s ease-in-out 0s',
+                                    }}
+                                  >
+                                    {item.title}
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      </>
+                    )}
+                  </div>
                 );
               })}
-            </ul>
-            <ul className="right inline-flex items-center justify-center">
+            </div>
+            <div className="right inline-flex items-center justify-center">
               <ThemeNeko />
-            </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -301,9 +412,9 @@ export const Header = () => {
                 key={url + index}
                 className="absolute left-0 top-0 h-full w-full animate-image-animation"
                 style={{
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  backgroundRepeat: 'no-repeat',
+                  backgroundSize: 'contain',
+                  backgroundPosition: 'top',
+                  backgroundRepeat: 'repeat',
                   backgroundImage: `url(${url})`,
                   opacity: 0,
                   backfaceVisibility: 'hidden',

@@ -51,6 +51,7 @@ const config: Config = {
       'slide-up-in': 'slide-up-in 0.3s',
       blur: 'blur 0.8s ease-in-out forwards',
       shake: 'shake 1s',
+      spin: 'spin 6s linear infinite',
     },
     keyframes: {
       'loading-cat': {
@@ -175,6 +176,14 @@ const config: Config = {
         },
         '100%': {
           transform: 'scale(1)',
+        },
+      },
+      spin: {
+        from: {
+          transform: 'rotate(0)',
+        },
+        to: {
+          transform: 'rotate(360deg)',
         },
       },
     },

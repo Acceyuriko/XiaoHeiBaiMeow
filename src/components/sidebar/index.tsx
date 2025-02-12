@@ -137,7 +137,7 @@ export const Sidebar = () => {
         ref={sidebarRef}
         id="sidebar"
         className={clsx(
-          'fixed bottom-0 right-0 top-0 z-[99] min-h-[100vh] w-[15rem] text-center text-grey-6',
+          'fixed bottom-0 right-0 top-0 z-[99] h-[100vh] w-[15rem] text-center text-grey-6',
           'shadow-[0_0.375rem_0.9375rem_0.3125rem_rgba(0,0,0,0.2)]',
           'bg-grey-1',
           isSidebarOpen ? 'flex' : 'hidden lg:flex',
@@ -147,12 +147,40 @@ export const Sidebar = () => {
           transition: 'all 0.2s ease-in-out',
         }}
       >
-        <div className="mx-auto mb-8 mt-2.5 flex animate-slide-up-big-in flex-col items-center px-[0.9375rem] pb-2 pt-[0.875rem]">
+        <div className="absolute bottom-1 flex w-full justify-center">
+          <div
+            className="group h-[1.875rem] min-h-[1.875rem] w-[25%] cursor-pointer transition-all duration-200 ease-in-out"
+            onClick={() => {
+              anime({
+                targets: document.documentElement,
+                duration: 500,
+                easing: 'easeInOutQuad',
+                scrollTop: 0,
+              }).play();
+            }}
+          >
+            <i className="ic i-arrow-up group-hover:text-red" />
+          </div>
+          <div
+            className="group h-[1.875rem] min-h-[1.875rem] w-[25%] cursor-pointer transition-all duration-200 ease-in-out"
+            onClick={() => {
+              anime({
+                targets: document.documentElement,
+                duration: 500,
+                easing: 'easeInOutQuad',
+                scrollTop: document.documentElement.scrollHeight,
+              }).play();
+            }}
+          >
+            <i className="ic i-arrow-down group-hover:text-red" />
+          </div>
+        </div>
+        <div className="no-scrollbar relative mx-auto mb-8 mt-2.5 flex h-full animate-slide-up-big-in flex-col items-center overflow-auto px-[0.9375rem] pb-2 pt-[0.875rem]">
           <div className="author group flex flex-col items-center gap-[5px]">
             <img
               src="/icon.png"
               alt=""
-              className="animate-blur group-hover:animate-shake mx-auto my-0 block max-w-[10rem] rounded-full p-[0.125rem]"
+              className="mx-auto my-0 block max-w-[10rem] animate-blur rounded-full p-[0.125rem] group-hover:animate-shake"
               style={{
                 border: '.0625rem solid var(--body-bg-shadow)',
                 boxShadow: '0 0 1rem .625rem var(--body-bg-shadow)',
@@ -161,7 +189,7 @@ export const Sidebar = () => {
             <div className="text-center text-grey-7">江江酱酱</div>
             <div className="text-center text-grey-5">江江の装修日记</div>
           </div>
-          <div className="state mt-[0.625rem] flex items-center justify-center divide-x divide-grey-4 overflow-hidden whitespace-nowrap text-center leading-[1.4]">
+          <div className="state mt-[0.625rem] flex shrink-0 items-center justify-center divide-x divide-grey-4 overflow-hidden whitespace-nowrap text-center leading-[1.4]">
             <Link className="flex flex-col items-center px-[0.9375rem]" to="/archives">
               <div className="text-center text-[1.25em] font-semibold">314</div>
               <div className="text-center text-[0.875em]">文章</div>
@@ -304,34 +332,6 @@ export const Sidebar = () => {
                 </div>
               );
             })}
-          </div>
-        </div>
-        <div className="absolute bottom-1 flex w-full justify-center">
-          <div
-            className="group h-[1.875rem] min-h-[1.875rem] w-[25%] cursor-pointer transition-all duration-200 ease-in-out"
-            onClick={() => {
-              anime({
-                targets: document.documentElement,
-                duration: 500,
-                easing: 'easeInOutQuad',
-                scrollTop: 0,
-              }).play();
-            }}
-          >
-            <i className="ic i-arrow-up group-hover:text-red" />
-          </div>
-          <div
-            className="group h-[1.875rem] min-h-[1.875rem] w-[25%] cursor-pointer transition-all duration-200 ease-in-out"
-            onClick={() => {
-              anime({
-                targets: document.documentElement,
-                duration: 500,
-                easing: 'easeInOutQuad',
-                scrollTop: document.documentElement.scrollHeight,
-              }).play();
-            }}
-          >
-            <i className="ic i-arrow-down group-hover:text-red" />
           </div>
         </div>
       </div>

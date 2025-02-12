@@ -320,4 +320,10 @@ body {
     min-height: 100%;
     min-width: 100%;
   }
+
+  .no-scrollbar {
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
 }

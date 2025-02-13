@@ -19,7 +19,7 @@ export const Layout = () => {
       >
         <div className="mx-auto flex items-start justify-center gap-3">
           <div
-            className="min-h-[37.5rem] w-full max-w-[1024px]"
+            className="flex min-h-[calc(100vh+10rem)] w-full max-w-[1024px] flex-col items-stretch"
             style={{
               background:
                 'linear-gradient(to top,rgb(var(--color-grey-0)) 0,rgb(var(--color-grey-1)) 20%) no-repeat top',
@@ -27,6 +27,7 @@ export const Layout = () => {
             }}
           >
             <Outlet />
+            <div className="grow" />
             <Footer />
           </div>
           <Sidebar />

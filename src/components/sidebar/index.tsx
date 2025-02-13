@@ -137,7 +137,7 @@ export const Sidebar = () => {
         ref={sidebarRef}
         id="sidebar"
         className={clsx(
-          'fixed bottom-0 right-0 top-0 z-[99] h-[100vh] w-[15rem] text-center text-grey-6',
+          'fixed right-0 top-0 z-[99] h-[100vh] w-[15rem] text-center text-grey-6',
           'shadow-[0_0.375rem_0.9375rem_0.3125rem_rgba(0,0,0,0.2)]',
           'bg-grey-1',
           isSidebarOpen ? 'flex' : 'hidden lg:flex',

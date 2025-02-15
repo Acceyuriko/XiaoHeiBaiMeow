@@ -16,22 +16,25 @@ export const About = () => {
           <img className="w-40" src={Wechat} />
         </div>
       </P>
-      <H1>窃谓夫为装者</H1>
+      <H1>盖闻装修之道</H1>
       <P>
-        能监能验；能刚能柔；能争能让；能细能周。
+        <span className="inline-block">能监能验；能刚能柔；</span>
+        <span className="inline-block">能争能让；能细能周。</span>
         <br />
         <span className="inline-block">守心如铁壁，算账若星筹；</span>
         <span className="inline-block">缜密如罗网，霹雳如雷飗。</span>
         <br />
         <span className="inline-block">预知建材之涨跌，先察工法之劣优；</span>
         <span className="inline-block">辨合同之陷阱，防奸商之诈谋。</span>
-        <br />
+      </P>
+      <P>
         <span className="inline-block">嗟彼无良工队，欺主昧幽；</span>
         <span className="inline-block">藏减料之伎俩，埋偷工于墙头；</span>
         <br />
         <span className="inline-block">瓷砖空鼓如蛙鸣，墙面开裂似蚓游；</span>
         <span className="inline-block">乳胶漆兑水半桶，电线管穿线三抽！</span>
-        <br />
+      </P>
+      <P>
         <span className="inline-block">哀哉懵懂业主，堕入阴沟；</span>
         <span className="inline-block">遭工长之糊弄，遇监理之忽悠；</span>
         <br />
@@ -40,41 +43,32 @@ export const About = () => {
         <br />
         <span className="inline-block">业主心焦而目眩，妻儿怨叹而泪愁！</span>
         <span className="inline-block">弃满屋之废料，堆盈室之烦忧；</span>
-        <span className="inline-block">无颜对亲朋之询问，何胆晒票圈之图楼！</span>
+        <span className="inline-block">惶惶焉怯亲朋之探问，戚戚然惧友邻之览楼！</span>
       </P>
       <P>
         <span className="inline-block">幸遇江江持炬，照迷雾于危舟；</span>
+        <br />
         <span className="inline-block">持合同为铁券，录视频作兜鍪；</span>
-        <span className="inline-block">验材料如鉴宝，查进度似巡囚。</span>
+        <span className="inline-block">验材料如观鼎，督工期似更筹；</span>
+        <span className="inline-block">察报价之虚实，辨工艺乎劣优；</span>
+        <span className="inline-block">破增项于未发，斩拖延在苗头。</span>
         <br />
-        <span className="inline-block">洞穿报价之虚实，明辨工艺之劣优；</span>
-        <span className="inline-block">破增项之套路，斩拖延之由头。</span>
-        <br />
-        <span className="inline-block">晨昏斗鬼魅，昼夜破幽谋；</span>
-        <span className="inline-block">工头闻风皆胆丧，奸商见影尽缩头！</span>
-        <br />
-        <span className="inline-block">终得见，陋室变华堂，锦幔映琼楼；</span>
-        <span className="inline-block">笑唤旧日坑人者，且来观我凤凰丘！</span>
-      </P>
-      {/* <H1>沁园春·江江</H1>
-      <P>
-        半世奔波，半生积蓄，半壁残墙。
-        <br />
-        恨泥工怠惰，瓦刀生锈； 漆工敷衍，滚筒无浆。
-        <br />
-        项目经理，偷梁换柱，增项连环套路长。
-        <br />
-        寒灯下，算账单叠泪，愁断肝肠。
+        <span className="inline-block">晨昏战猾偷，昼夜破幽谋；</span>
+        <span className="inline-block">工头闻风皆丧胆，奸商见影尽缩头！</span>
       </P>
       <P>
-        江江妙计无双，引百万粉丝破雾障。
+        呜呼！
+        <span className="inline-block">吾匠艺精而器利，神工电掣而风扬；</span>
+        <span className="inline-block">劈顽石成玉阙，夷颓壁作康庄；</span>
+        <span className="inline-block">摧旧阁如齑粉，筑新居胜帝乡！</span>
         <br />
-        要合同钉钉，工钱后付； 验收步步，证据桩桩。
+        <span className="inline-block">瓦刀落处星河转，墨斗弹时规矩张；</span>
+        <span className="inline-block">吊顶若垂云列阵，铺砖似镜海流光；</span>
+        <span className="inline-block">水电潜行如龙脉，漆彩腾辉胜霞芒；</span>
+        <span className="inline-block">三通验收皆合契，九验监理尽伏降！</span>
         <br />
-        斗智晨昏，拆招日夜，材料甄别火眼强。
-        <br />
-        终得见，那新居焕彩，苦尽甘尝！
-      </P> */}
+        <span className="inline-block">待他日陋室焕琼宇，且共君琼筵醉画堂！</span>
+      </P>
       <Appreciate />
     </div>
   );

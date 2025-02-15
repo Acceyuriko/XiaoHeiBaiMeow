@@ -17,7 +17,7 @@ export const Layout = () => {
             'linear-gradient(to top,var(--body-bg-shadow) 0,rgb(var(--color-grey-1)) 20%) no-repeat bottom',
         }}
       >
-        <div className="mx-auto flex items-start justify-center gap-3">
+        <div className="mx-auto flex animate-slide-up-big-in items-start justify-center gap-3">
           <div
             className="flex min-h-[calc(100vh+10rem)] w-full max-w-[1024px] flex-col items-stretch"
             style={{

@@ -8,7 +8,8 @@ const BASE_PATH = path.join(__dirname, '../public/notes');
 
 (async () => {
   const notes = await readdir(BASE_PATH);
-  const meta: NodeMeta[] = [];
+  const meta: NoteMeta[] = [];
+  const tags = new Set<string>();
   const nameSet = new Set();
   for (const note of notes) {
     console.log('process ', note);
@@ -42,8 +43,19 @@ const BASE_PATH = path.join(__dirname, '../public/notes');
       content,
       charactors: content.length,
     });
+    for (const tag of yamlData.tags) {
+      tags.add(tag);
+    }
   }
 
-  await writeFile(path.join(__dirname, '../public/notes.json'), JSON.stringify(meta));
+  meta.sort((a, b) => b.updatedAt - a.updatedAt);
+
+  await writeFile(
+    path.join(__dirname, '../public/notes.json'),
+    JSON.stringify({
+      notes: meta,
+      tags: Array.from(tags),
+    }),
+  );
   console.log('done');
 })();

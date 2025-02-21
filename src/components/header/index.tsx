@@ -346,7 +346,7 @@ export const Header = () => {
                         <div className="ml-[0.3rem] mt-[0.4rem] inline-block border-[0.3rem] border-[transparent] border-t-[currentColor] align-middle"></div>
                         <div className="absolute left-0 top-0">
                           <div
-                            className="animate-slide-up-in ml-2.5 mt-10 hidden w-max flex-col overflow-hidden p-0 group-hover:flex"
+                            className="ml-2.5 mt-10 hidden w-max animate-slide-up-in flex-col overflow-hidden p-0 group-hover:flex"
                             style={{
                               backgroundColor: isNavVisible
                                 ? 'rgb(var(--color-grey-1))'

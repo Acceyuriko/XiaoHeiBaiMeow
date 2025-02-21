@@ -1,4 +1,4 @@
-interface NodeMeta {
+interface NoteMeta {
   title: string;
   description: string;
   createdAt: number;

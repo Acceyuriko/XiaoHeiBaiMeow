@@ -4,12 +4,14 @@ import { ReactNode, useCallback, useEffect, useMemo, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router';
 import anime from 'theme-shokax-anime';
 
+import { useNotes } from '@/hooks/useNotes';
 import { useAppStore } from '@/store/app';
 
 export const Sidebar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { isSidebarOpen, setIsSidebarOpen } = useAppStore();
+  const { data } = useNotes();
 
   const sidebarRef = useRef<HTMLDivElement>(null);
 
@@ -96,16 +98,17 @@ export const Sidebar = () => {
             to: '/archives',
           },
           {
-            name: '分类',
-            icon: <i className="ic i-th" />,
-            to: '/categories',
-          },
-          {
             name: '标签',
             icon: <i className="ic i-tags" />,
             to: '/tags',
           },
         ],
+      },
+      {
+        name: '宝库',
+        icon: <i className="ic i-th" />,
+        to: '/treasure',
+        children: [],
       },
     ];
   }, []);
@@ -191,15 +194,20 @@ export const Sidebar = () => {
           </div>
           <div className="state mt-[0.625rem] flex shrink-0 items-center justify-center divide-x divide-grey-4 overflow-hidden whitespace-nowrap text-center leading-[1.4]">
             <Link className="flex flex-col items-center px-[0.9375rem]" to="/archives">
-              <div className="text-center text-[1.25em] font-semibold">314</div>
+              <div className="text-center text-[1.25em] font-semibold">{data?.notes.length}</div>
               <div className="text-center text-[0.875em]">文章</div>
             </Link>
-            <Link className="flex flex-col items-center px-[0.9375rem]" to="/categories">
-              <div className="text-center text-[1.25em] font-semibold">74</div>
-              <div className="text-center text-[0.875em]">分类</div>
-            </Link>
             <Link className="flex flex-col items-center px-[0.9375rem]" to="/tags">
-              <div className="text-center text-[1.25em] font-semibold">73</div>
+              <div className="text-center text-[1.25em] font-semibold">
+                {data
+                  ? data.notes.reduce((pre, cur) => {
+                      for (const tag of cur.tags) {
+                        pre.add(tag);
+                      }
+                      return pre;
+                    }, new Set()).size
+                  : 0}
+              </div>
               <div className="text-center text-[0.875em]">标签</div>
             </Link>
           </div>

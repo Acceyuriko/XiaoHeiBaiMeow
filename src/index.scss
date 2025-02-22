@@ -32,7 +32,7 @@
     --color-pink-light-a5: rgba(255, 230, 250, 0.5);
     --color-pink-light-a7: rgba(255, 230, 250, 0.7);
     --body-bg-shadow: rgb(var(--color-grey-2));
-
+    --box-bg-shadow: rgb(var(--color-grey-9) / 0.1);
     --color-cat-border: rgb(56, 60, 75);
     --color-cat-body: rgb(237, 166, 93);
     --color-cat-tail: rgb(198, 130, 59);
@@ -180,6 +180,7 @@
     --color-pink: rgba(241, 139, 179, 0.8);
     --color-orange: rgba(240, 163, 135, 0.8);
     --body-bg-shadow: #000;
+    --box-bg-shadow: #000;
 
     // .primary {
     //   --note-border: rgba(123, 96, 119, 0.8);

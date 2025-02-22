@@ -89,6 +89,34 @@ const router = createBrowserRouter([
         },
       },
       {
+        path: '/note/:title',
+        lazy: async () => {
+          const { Note } = await import('@/pages/note');
+          return { Component: Note };
+        },
+      },
+      {
+        path: '/tags',
+        lazy: async () => {
+          const { Tags } = await import('@/pages/tags');
+          return { Component: Tags };
+        },
+      },
+      {
+        path: '/tag/:tag',
+        lazy: async () => {
+          const { Tag } = await import('@/pages/tag');
+          return { Component: Tag };
+        },
+      },
+      {
+        path: '/treasure',
+        lazy: async () => {
+          const { Treasure } = await import('@/pages/treasure');
+          return { Component: Treasure };
+        },
+      },
+      {
         path: '*',
         lazy: async () => {
           const { Page404 } = await import('@/pages/404');

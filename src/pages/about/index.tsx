@@ -62,9 +62,10 @@ export const About = () => {
         <span className="inline-block">劈顽石成玉阙，夷颓壁作康庄；</span>
         <span className="inline-block">摧旧阁如齑粉，筑新居胜帝乡！</span>
         <br />
-        <span className="inline-block">瓦刀落处星河转，墨斗弹时规矩张；</span>
         <span className="inline-block">吊顶若垂云列阵，铺砖似镜海流光；</span>
-        <span className="inline-block">水电潜行如龙脉，漆彩腾辉胜霞芒；</span>
+        <span className="inline-block">水电如潜行龙脉，漆彩胜腾辉霞芒！</span>
+        <br />
+        <span className="inline-block">瓦刀落处星河转，墨斗弹时规矩张；</span>
         <span className="inline-block">三通验收皆合契，九验监理尽伏降！</span>
         <br />
         <span className="inline-block">待他日陋室焕琼宇，且共君琼筵醉画堂！</span>

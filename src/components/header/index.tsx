@@ -181,15 +181,6 @@ export const Header = () => {
           {
             title: (
               <span>
-                <i className="ic i-th mr-2" />
-                分类
-              </span>
-            ),
-            href: '/categories',
-          },
-          {
-            title: (
-              <span>
                 <i className="ic i-tags mr-2" />
                 标签
               </span>
@@ -197,6 +188,16 @@ export const Header = () => {
             href: '/tags',
           },
         ],
+      },
+      {
+        title: (
+          <span>
+            <i className="ic i-th mr-2" />
+            宝库
+          </span>
+        ),
+        href: '/treasure',
+        children: [],
       },
     ];
   }, []);

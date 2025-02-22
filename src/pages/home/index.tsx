@@ -52,16 +52,18 @@ export const Home = () => {
             <span className="mx-4 whitespace-nowrap">置顶文章</span>
             {divideLine}
           </div>
-          <NoteCard note={lastNote} />
-          <div className="my-4 flex items-center justify-center text-[24px]/[1] font-light tracking-wider text-grey-4">
-            {divideLine}
-            <span className="mx-4 whitespace-nowrap">文章列表</span>
-            {divideLine}
-          </div>
+          <NoteCard note={lastNote} left={true} />
+          {notes.length > 0 && (
+            <div className="my-4 flex items-center justify-center text-[24px]/[1] font-light tracking-wider text-grey-4">
+              {divideLine}
+              <span className="mx-4 whitespace-nowrap">文章列表</span>
+              {divideLine}
+            </div>
+          )}
         </>
       )}
-      {notes.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE).map((i) => (
-        <NoteCard key={i.createdAt} note={i} />
+      {notes.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE).map((i, index) => (
+        <NoteCard key={i.createdAt} note={i} left={index % 2 === 0} />
       ))}
       <Pagination
         page={page}

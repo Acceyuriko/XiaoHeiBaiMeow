@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.59.20",
+    "@types/markdown-it": "^14.1.2",
     "classnames": "^2.5.1",
     "dayjs": "^1.11.13",
     "js-yaml": "^4.1.0",
@@ -24,6 +25,7 @@
     "react-dom": "^18.3.1",
     "react-hot-toast": "^2.4.1",
     "react-router": "^7.1.1",
+    "remove-markdown": "^0.6.0",
     "theme-shokax-anime": "^0.0.7",
     "zustand": "5.0.1"
   },

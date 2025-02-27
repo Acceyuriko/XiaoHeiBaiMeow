@@ -1,4 +1,5 @@
-@import './iconfont.css';
+@use './styles/iconfont.scss';
+@use './styles/markdown.scss';
 
 @tailwind base;
 @tailwind components;
@@ -23,7 +24,7 @@
     --color-purple: 157 91 139;
     --color-grey: 134 145 148;
     --color-pink-light: #ffe6fa;
-    --color-cyan-light: rgba(227, 253, 245, 0.72);
+    --color-cyan-light: #e3fdf5;
     --color-red: #e9546b;
     --color-pink: #ed6ea0;
     --color-pink-a3: rgba(237, 110, 160, 0.3);
@@ -125,36 +126,36 @@
     --size-cat-tummy-w: 1.5em;
     --size-cat-border-w: 0.375em;
 
-    // .primary {
-    //   --note-border: #cda0c7;
-    //   --note-bg: #fdf8ff;
-    //   --note-text: #8a51c0;
-    //   --note-hover: #935aca;
-    // }
-    // .info {
-    //   --note-border: #8fa4dc;
-    //   --note-bg: #f1f9ff;
-    //   --note-text: #1d4974;
-    //   --note-hover: #1d5fa0;
-    // }
-    // .success {
-    //   --note-border: #a3c293;
-    //   --note-bg: #fcfff5;
-    //   --note-text: #2c662d;
-    //   --note-hover: #3b883c;
-    // }
-    // .warning {
-    //   --note-border: #c9ba9b;
-    //   --note-bg: #fffbeb;
-    //   --note-text: #947600;
-    //   --note-hover: #ccb045;
-    // }
-    // .danger {
-    //   --note-border: #f4b3c1;
-    //   --note-bg: #fff2f5;
-    //   --note-text: #cc0f35;
-    //   --note-hover: #f14668;
-    // }
+    .primary {
+      --note-border: #cda0c7;
+      --note-bg: #fdf8ff;
+      --note-text: #8a51c0;
+      --note-hover: #935aca;
+    }
+    .info {
+      --note-border: #8fa4dc;
+      --note-bg: #f1f9ff;
+      --note-text: #1d4974;
+      --note-hover: #1d5fa0;
+    }
+    .success {
+      --note-border: #a3c293;
+      --note-bg: #fcfff5;
+      --note-text: #2c662d;
+      --note-hover: #3b883c;
+    }
+    .warning {
+      --note-border: #c9ba9b;
+      --note-bg: #fffbeb;
+      --note-text: #947600;
+      --note-hover: #ccb045;
+    }
+    .danger {
+      --note-border: #f4b3c1;
+      --note-bg: #fff2f5;
+      --note-text: #cc0f35;
+      --note-hover: #f14668;
+    }
   }
 
   :root[class~='dark'] {
@@ -182,36 +183,36 @@
     --body-bg-shadow: #000;
     --box-bg-shadow: #000;
 
-    // .primary {
-    //   --note-border: rgba(123, 96, 119, 0.8);
-    //   --note-bg: rgba(50, 49, 50, 0.8);
-    //   --note-text: rgba(161, 116, 205, 0.8);
-    //   --note-hover: rgba(117, 72, 161, 0.8);
-    // }
-    // .info {
-    //   --note-border: rgba(85, 98, 132, 0.8);
-    //   --note-bg: rgba(48, 49, 50, 0.8);
-    //   --note-text: rgba(109, 164, 219, 0.8);
-    //   --note-hover: rgba(39, 127, 214, 0.8);
-    // }
-    // .success {
-    //   --note-border: rgba(97, 116, 88, 0.8);
-    //   --note-bg: rgba(50, 50, 48, 0.8);
-    //   --note-text: rgba(128, 200, 129, 0.8);
-    //   --note-hover: rgba(41, 95, 42, 0.8);
-    // }
-    // .warning {
-    //   --note-border: rgba(120, 111, 93, 0.8);
-    //   --note-bg: rgba(50, 50, 46, 0.8);
-    //   --note-text: rgba(220, 176, 0, 0.8);
-    //   --note-hover: rgba(163, 140, 55, 0.8);
-    // }
-    // .danger {
-    //   --note-border: rgba(146, 107, 115, 0.8);
-    //   --note-bg: rgba(50, 48, 48, 0.8);
-    //   --note-text: rgba(239, 38, 79, 0.8);
-    //   --note-hover: rgba(168, 49, 72, 0.8);
-    // }
+    .primary {
+      --note-border: rgba(123, 96, 119, 0.8);
+      --note-bg: rgba(50, 49, 50, 0.8);
+      --note-text: rgba(161, 116, 205, 0.8);
+      --note-hover: rgba(117, 72, 161, 0.8);
+    }
+    .info {
+      --note-border: rgba(85, 98, 132, 0.8);
+      --note-bg: rgba(48, 49, 50, 0.8);
+      --note-text: rgba(109, 164, 219, 0.8);
+      --note-hover: rgba(39, 127, 214, 0.8);
+    }
+    .success {
+      --note-border: rgba(97, 116, 88, 0.8);
+      --note-bg: rgba(50, 50, 48, 0.8);
+      --note-text: rgba(128, 200, 129, 0.8);
+      --note-hover: rgba(41, 95, 42, 0.8);
+    }
+    .warning {
+      --note-border: rgba(120, 111, 93, 0.8);
+      --note-bg: rgba(50, 50, 46, 0.8);
+      --note-text: rgba(220, 176, 0, 0.8);
+      --note-hover: rgba(163, 140, 55, 0.8);
+    }
+    .danger {
+      --note-border: rgba(146, 107, 115, 0.8);
+      --note-bg: rgba(50, 48, 48, 0.8);
+      --note-text: rgba(239, 38, 79, 0.8);
+      --note-hover: rgba(168, 49, 72, 0.8);
+    }
   }
 }
 

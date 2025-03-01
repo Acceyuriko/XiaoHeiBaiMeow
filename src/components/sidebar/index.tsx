@@ -189,7 +189,7 @@ export const Sidebar = () => {
                 boxShadow: '0 0 1rem .625rem var(--body-bg-shadow)',
               }}
             />
-            <div className="text-center text-grey-7">江江酱酱</div>
+            <div className="text-center text-grey-7">江江大佬</div>
             <div className="text-center text-grey-5">江江の装修日记</div>
           </div>
           <div className="state mt-[0.625rem] flex shrink-0 items-center justify-center divide-x divide-grey-4 overflow-hidden whitespace-nowrap text-center leading-[1.4]">

@@ -4,3 +4,5 @@ export const SCREEN = {
 };
 
 export const READING_SPEED = 300;
+
+export const COLOR_CLASSES = ['primary', 'info', 'success', 'warning', 'danger'];

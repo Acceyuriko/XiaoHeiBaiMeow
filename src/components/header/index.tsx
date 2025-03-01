@@ -139,7 +139,7 @@ export const Header = () => {
   const menus = useMemo(() => {
     return [
       {
-        title: '江江酱酱（装修中）',
+        title: '江江大佬（装修中）',
         href: '/',
         children: [],
       },

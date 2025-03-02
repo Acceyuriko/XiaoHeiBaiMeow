@@ -2,14 +2,13 @@ import clsx from 'classnames';
 import dayjs from 'dayjs';
 import { useEffect, useMemo, useRef } from 'react';
 import { Link, useNavigate, useParams } from 'react-router';
-import anime from 'theme-shokax-anime';
 
 import { Appreciate } from '@/components/appreciate';
 import { CatLoading } from '@/components/cat-loading';
 import { useNotes } from '@/hooks/useNotes';
 import { useAppStore } from '@/store/app';
 import { COLOR_CLASSES, READING_SPEED } from '@/utils/constants';
-import { renderMarkdown, shortenNumber } from '@/utils/helper';
+import { renderMarkdown, scrollToTop, shortenNumber } from '@/utils/helper';
 
 export const Note = () => {
   const { title } = useParams<{ title: string }>();
@@ -54,12 +53,7 @@ export const Note = () => {
     setTitle(note.title);
     const content = renderMarkdown(note.content, note.title);
     noteRef.current.innerHTML = content;
-    anime({
-      targets: document.documentElement,
-      duration: 500,
-      easing: 'easeInOutQuad',
-      scrollTop: 0,
-    }).play();
+    scrollToTop();
   }, [note, setSubTitle, setTitle]);
 
   useEffect(() => {

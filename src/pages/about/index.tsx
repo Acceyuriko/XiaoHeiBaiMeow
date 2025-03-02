@@ -1,8 +1,15 @@
+import { useEffect } from 'react';
+
 import Wechat from './assets/wechat.png';
 import { Appreciate } from '@/components/appreciate';
 import { H1, P, Ul, Li } from '@/components/text';
+import { scrollToTop } from '@/utils/helper';
 
 export const About = () => {
+  useEffect(() => {
+    scrollToTop();
+  }, []);
+
   return (
     <div className="flex animate-slide-up-big-in flex-col items-stretch p-5">
       <H1>关于我</H1>

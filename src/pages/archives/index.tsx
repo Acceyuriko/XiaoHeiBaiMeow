@@ -6,6 +6,7 @@ import { CatLoading } from '@/components/cat-loading';
 import { Timeline } from '@/components/timeline';
 import { useNotes } from '@/hooks/useNotes';
 import { useAppStore } from '@/store/app';
+import { scrollToTop } from '@/utils/helper';
 
 export const Archives = () => {
   const { data, isLoading } = useNotes();
@@ -14,6 +15,7 @@ export const Archives = () => {
   useEffect(() => {
     setTitle('归档');
     setSubTitle(<span></span>);
+    scrollToTop();
     return () => {
       setTitle('');
       setSubTitle(undefined);

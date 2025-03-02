@@ -5,6 +5,7 @@ import { TagCloud } from 'react-tagcloud';
 import { CatLoading } from '@/components/cat-loading';
 import { useNotes } from '@/hooks/useNotes';
 import { useAppStore } from '@/store/app';
+import { scrollToTop } from '@/utils/helper';
 
 export const Tags = () => {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ export const Tags = () => {
   useEffect(() => {
     setTitle('全部标签');
     setSubTitle(<span></span>);
+    scrollToTop();
     return () => {
       setTitle('');
       setSubTitle(undefined);

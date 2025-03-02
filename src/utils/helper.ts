@@ -1,6 +1,7 @@
 import markdown from 'markdown-it';
 import mdTocAndAnchor from 'markdown-it-toc-and-anchor';
 import path from 'path';
+import anime from 'theme-shokax-anime';
 
 export const renderMarkdown = (content: string, title: string) => {
   const md = markdown({
@@ -32,4 +33,13 @@ export const shortenNumber = (num: number) => {
     return `${(num / 1000_000).toFixed(1)}m`;
   }
   return `${(num / 1000_000_000).toFixed(1)}b`;
+};
+
+export const scrollToTop = () => {
+  anime({
+    targets: document.documentElement,
+    duration: 100,
+    easing: 'easeInOutQuad',
+    scrollTop: 0,
+  }).play();
 };

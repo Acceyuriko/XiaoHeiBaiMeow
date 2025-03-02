@@ -6,6 +6,7 @@ import { CatLoading } from '@/components/cat-loading';
 import { Timeline } from '@/components/timeline';
 import { useNotes } from '@/hooks/useNotes';
 import { useAppStore } from '@/store/app';
+import { scrollToTop } from '@/utils/helper';
 
 export const Tag = () => {
   const { tag } = useParams<{ tag: string }>();
@@ -15,6 +16,7 @@ export const Tag = () => {
   useEffect(() => {
     setTitle(`包含标签“${tag}”的文章`);
     setSubTitle(<span></span>);
+    scrollToTop();
     return () => {
       setTitle('');
       setSubTitle(undefined);

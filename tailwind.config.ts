@@ -27,6 +27,7 @@ const config: Config = {
       'pink-light': 'var(--color-pink-light)',
       'cyan-light': 'var(--color-cyan-light)',
       red: 'var(--color-red)',
+      'red-a3': 'var(--color-red-a3)',
       pink: 'var(--color-pink)',
       orange: 'var(--color-orange)',
       'pink-light-a3': 'var(--color-pink-light-a3)',

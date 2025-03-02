@@ -1,4 +1,5 @@
 import clsx from 'classnames';
+import dayjs from 'dayjs';
 import { useEffect, useMemo, useRef } from 'react';
 import { Link, useNavigate, useParams } from 'react-router';
 import anime from 'theme-shokax-anime';
@@ -7,13 +8,13 @@ import { Appreciate } from '@/components/appreciate';
 import { CatLoading } from '@/components/cat-loading';
 import { useNotes } from '@/hooks/useNotes';
 import { useAppStore } from '@/store/app';
-import { COLOR_CLASSES } from '@/utils/constants';
-import { renderMarkdown } from '@/utils/helper';
+import { COLOR_CLASSES, READING_SPEED } from '@/utils/constants';
+import { renderMarkdown, shortenNumber } from '@/utils/helper';
 
 export const Note = () => {
   const { title } = useParams<{ title: string }>();
   const navigate = useNavigate();
-  const { setNote } = useAppStore();
+  const { setSubTitle, setTitle } = useAppStore();
 
   const { data } = useNotes();
 
@@ -33,7 +34,24 @@ export const Note = () => {
     if (!note || !noteRef.current) {
       return;
     }
-    setNote(note);
+
+    setSubTitle(
+      <div className="flex flex-wrap items-center justify-end gap-2.5 leading-[2] text-grey-0">
+        <div className="flex items-center gap-1">
+          <i className="ic i-calendar" />
+          <span>{dayjs(note.createdAt).format('YYYY-MM-DD HH:mm')}</span>
+        </div>
+        <div className="flex items-center gap-1">
+          <i className="ic i-pen" />
+          <span>{shortenNumber(note.charactors)}字</span>
+        </div>
+        <div className="flex items-center gap-1">
+          <i className="ic i-clock" />
+          <span>{Math.ceil(note.charactors / READING_SPEED)}分钟</span>
+        </div>
+      </div>,
+    );
+    setTitle(note.title);
     const content = renderMarkdown(note.content, note.title);
     noteRef.current.innerHTML = content;
     anime({
@@ -42,13 +60,14 @@ export const Note = () => {
       easing: 'easeInOutQuad',
       scrollTop: 0,
     }).play();
-  }, [note, setNote]);
+  }, [note, setSubTitle, setTitle]);
 
   useEffect(() => {
     return () => {
-      setNote(undefined);
+      setSubTitle(undefined);
+      setTitle('');
     };
-  }, [setNote]);
+  }, [setSubTitle, setTitle]);
 
   if (!note) {
     return (
@@ -61,7 +80,7 @@ export const Note = () => {
   return (
     <div className="mx-[5px] mb-5 flex animate-slide-up-big-in flex-col items-stretch p-2 md:p-5">
       <div className="markdown md:px-8" ref={noteRef}></div>
-      <div className="mt-5 flex items-center gap-2">
+      <div className="mt-5 flex items-center gap-2 md:mx-8">
         {note.tags.map((i) => (
           <Link
             key={i}
@@ -80,7 +99,7 @@ export const Note = () => {
       <div>
         <Appreciate />
       </div>
-      <div className="flex flex-col items-stretch rounded-[10px] bg-grey-2 px-8 py-4 text-[0.75em] text-grey-6">
+      <div className="flex flex-col items-stretch rounded-[10px] bg-grey-2 px-8 py-4 text-[0.75em] text-grey-6 md:mx-8">
         <div>
           <i className="ic i-person mr-[5px]" />
           <strong>本文作者：</strong>

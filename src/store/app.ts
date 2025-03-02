@@ -1,8 +1,11 @@
+import React from 'react';
 import { create } from 'zustand';
 
 export interface AppState {
-  note: NoteMeta | undefined;
-  setNote: (note: NoteMeta | undefined) => void;
+  title: string;
+  setTitle: (title: string) => void;
+  subTitle: React.ReactNode;
+  setSubTitle: (subTitle: React.ReactNode) => void;
   loading: boolean;
   setLoading: (state: boolean) => void;
   isSidebarOpen: boolean;
@@ -10,8 +13,10 @@ export interface AppState {
 }
 
 export const useAppStore = create<AppState>()((set) => ({
-  note: undefined,
-  setNote: (note) => set({ note }),
+  title: '',
+  setTitle: (title) => set({ title }),
+  subTitle: '',
+  setSubTitle: (subTitle) => set({ subTitle }),
   loading: true,
   setLoading: (state) => set({ loading: state }),
   isSidebarOpen: false,

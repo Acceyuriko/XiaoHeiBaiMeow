@@ -1,6 +1,5 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import clsx from 'classnames';
-import dayjs from 'dayjs';
 import { shuffle, throttle } from 'lodash';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
@@ -52,15 +51,13 @@ import CoverHelmet from './assets/covers/cover_helmet.jpg';
 import Title from './assets/title.png';
 import { ThemeNeko } from './components/theme-neko';
 import { useAppStore } from '@/store/app';
-import { READING_SPEED } from '@/utils/constants';
-import { shortenNumber } from '@/utils/helper';
 
 const BASE_DURATION = 3;
 
 export const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { setLoading, setIsSidebarOpen, note } = useAppStore();
+  const { setLoading, setIsSidebarOpen, subTitle, title } = useAppStore();
 
   const [scrollDirection, setScrollDirection] = useState<'up' | 'down'>('down');
   const [isNavVisible, setIsNavVisible] = useState(false);
@@ -263,33 +260,16 @@ export const Header = () => {
         <div className="brand fixed flex h-[50vh] min-h-[10rem] w-full flex-col items-center justify-center px-12 text-center">
           <div className="flex flex-col items-center justify-center">
             <div className="my-2.5">
-              {note ? (
+              {title ? (
                 <div className="my-2.5 text-[1.5em]/[1.5] font-bold tracking-[0.125rem] text-grey-0">
-                  {note.title}
+                  {title}
                 </div>
               ) : (
                 <img src={Title} alt="江江の装修日记" className="max-h-20" />
               )}
             </div>
             <div className="m-0 text-[0.75em] md:text-[0.8125em]">
-              {note ? (
-                <div className="flex flex-wrap items-center justify-end gap-2.5 leading-[2] text-grey-0">
-                  <div className="flex items-center gap-1">
-                    <i className="ic i-calendar" />
-                    <span>{dayjs(note.createdAt).format('YYYY-MM-DD HH:mm')}</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <i className="ic i-pen" />
-                    <span>{shortenNumber(note.charactors)}字</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <i className="ic i-clock" />
-                    <span>{Math.ceil(note.charactors / READING_SPEED)}分钟</span>
-                  </div>
-                </div>
-              ) : (
-                '= 得道者多助，失道者寡助 ='
-              )}
+              {subTitle ? subTitle : '= 得道者多助，失道者寡助 ='}
             </div>
           </div>
         </div>

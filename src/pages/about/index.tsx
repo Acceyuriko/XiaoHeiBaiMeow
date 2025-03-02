@@ -1,17 +1,11 @@
-import { useEffect } from 'react';
-
 import Wechat from './assets/wechat.png';
 import { Appreciate } from '@/components/appreciate';
+import { Body } from '@/components/body';
 import { H1, P, Ul, Li } from '@/components/text';
-import { scrollToTop } from '@/utils/helper';
 
 export const About = () => {
-  useEffect(() => {
-    scrollToTop();
-  }, []);
-
   return (
-    <div className="flex animate-slide-up-big-in flex-col items-stretch p-5">
+    <Body isLoading={false}>
       <H1>关于我</H1>
       <P>
         <div className="flex flex-col justify-between md:flex-row">
@@ -78,6 +72,6 @@ export const About = () => {
         <span className="inline-block">待他日陋室焕琼宇，且共君琼筵醉画堂！</span>
       </P>
       <Appreciate />
-    </div>
+    </Body>
   );
 };

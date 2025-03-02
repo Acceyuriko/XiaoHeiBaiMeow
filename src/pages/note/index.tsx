@@ -4,16 +4,14 @@ import { useEffect, useMemo, useRef } from 'react';
 import { Link, useNavigate, useParams } from 'react-router';
 
 import { Appreciate } from '@/components/appreciate';
-import { CatLoading } from '@/components/cat-loading';
+import { Body } from '@/components/body';
 import { useNotes } from '@/hooks/useNotes';
-import { useAppStore } from '@/store/app';
 import { COLOR_CLASSES, READING_SPEED } from '@/utils/constants';
-import { renderMarkdown, scrollToTop, shortenNumber } from '@/utils/helper';
+import { renderMarkdown, shortenNumber } from '@/utils/helper';
 
 export const Note = () => {
   const { title } = useParams<{ title: string }>();
   const navigate = useNavigate();
-  const { setSubTitle, setTitle } = useAppStore();
 
   const { data } = useNotes();
 
@@ -34,48 +32,36 @@ export const Note = () => {
       return;
     }
 
-    setSubTitle(
-      <div className="flex flex-wrap items-center justify-end gap-2.5 leading-[2] text-grey-0">
-        <div className="flex items-center gap-1">
-          <i className="ic i-calendar" />
-          <span>{dayjs(note.createdAt).format('YYYY-MM-DD HH:mm')}</span>
-        </div>
-        <div className="flex items-center gap-1">
-          <i className="ic i-pen" />
-          <span>{shortenNumber(note.charactors)}字</span>
-        </div>
-        <div className="flex items-center gap-1">
-          <i className="ic i-clock" />
-          <span>{Math.ceil(note.charactors / READING_SPEED)}分钟</span>
-        </div>
-      </div>,
-    );
-    setTitle(note.title);
     const content = renderMarkdown(note.content, note.title);
     noteRef.current.innerHTML = content;
-    scrollToTop();
-  }, [note, setSubTitle, setTitle]);
-
-  useEffect(() => {
-    return () => {
-      setSubTitle(undefined);
-      setTitle('');
-    };
-  }, [setSubTitle, setTitle]);
-
-  if (!note) {
-    return (
-      <div className="relative h-80 w-full">
-        <CatLoading />
-      </div>
-    );
-  }
+  }, [note]);
 
   return (
-    <div className="mx-[5px] mb-5 flex animate-slide-up-big-in flex-col items-stretch p-2 md:p-5">
+    <Body
+      isLoading={!note}
+      title={note?.title}
+      subTitle={
+        note ? (
+          <div className="flex flex-wrap items-center justify-end gap-2.5 leading-[2] text-grey-0">
+            <div className="flex items-center gap-1">
+              <i className="ic i-calendar" />
+              <span>{dayjs(note.createdAt).format('YYYY-MM-DD HH:mm')}</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <i className="ic i-pen" />
+              <span>{shortenNumber(note.charactors)}字</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <i className="ic i-clock" />
+              <span>{Math.ceil(note.charactors / READING_SPEED)}分钟</span>
+            </div>
+          </div>
+        ) : undefined
+      }
+    >
       <div className="markdown md:px-8" ref={noteRef}></div>
       <div className="mt-5 flex items-center gap-2 md:mx-8">
-        {note.tags.map((i) => (
+        {note?.tags.map((i) => (
           <Link
             key={i}
             to={`/tag/${i}`}
@@ -115,6 +101,6 @@ export const Note = () => {
           </span>
         </div>
       </div>
-    </div>
+    </Body>
   );
 };

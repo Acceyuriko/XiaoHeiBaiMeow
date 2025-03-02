@@ -1,26 +1,13 @@
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useNavigate } from 'react-router';
 import { TagCloud } from 'react-tagcloud';
 
-import { CatLoading } from '@/components/cat-loading';
+import { Body } from '@/components/body';
 import { useNotes } from '@/hooks/useNotes';
-import { useAppStore } from '@/store/app';
-import { scrollToTop } from '@/utils/helper';
 
 export const Tags = () => {
   const navigate = useNavigate();
-  const { setTitle, setSubTitle } = useAppStore();
   const { data } = useNotes();
-
-  useEffect(() => {
-    setTitle('全部标签');
-    setSubTitle(<span></span>);
-    scrollToTop();
-    return () => {
-      setTitle('');
-      setSubTitle(undefined);
-    };
-  }, [setTitle, setSubTitle]);
 
   const tags = useMemo(() => {
     if (!data) {
@@ -42,16 +29,8 @@ export const Tags = () => {
     }));
   }, [data]);
 
-  if (!data) {
-    return (
-      <div className="relative h-80 w-full">
-        <CatLoading />
-      </div>
-    );
-  }
-
   return (
-    <div className="mx-[5px] mb-5 animate-slide-up-big-in p-2 md:p-5">
+    <Body isLoading={!data} title="全部标签" subTitle={<span></span>}>
       <TagCloud
         className="[&>*]:cursor-pointer"
         minSize={18}
@@ -59,6 +38,6 @@ export const Tags = () => {
         tags={tags}
         onClick={(tag) => navigate(`/tag/${tag.value}`)}
       />
-    </div>
+    </Body>
   );
 };

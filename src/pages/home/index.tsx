@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 
-import { CatLoading } from '@/components/cat-loading';
+import { Body } from '@/components/body';
 import { NoteCard } from '@/components/note-card';
 import { Pagination } from '@/components/pagination';
 import { useNotes } from '@/hooks/useNotes';
@@ -35,16 +35,8 @@ export const Home = () => {
     );
   }, []);
 
-  if (!lastNote) {
-    return (
-      <div className="relative h-80">
-        <CatLoading />
-      </div>
-    );
-  }
-
   return (
-    <div className="relative mx-[5px] mb-5 flex flex-col items-stretch p-2.5">
+    <Body isLoading={!lastNote}>
       {page === 1 && (
         <>
           <div className="my-4 flex items-center justify-center text-[24px]/[1] font-light tracking-wider text-grey-4">
@@ -72,6 +64,6 @@ export const Home = () => {
           setPage(next);
         }}
       />
-    </div>
+    </Body>
   );
 };

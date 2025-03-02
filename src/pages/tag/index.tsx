@@ -1,27 +1,14 @@
 import dayjs from 'dayjs';
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useParams, Link } from 'react-router';
 
-import { CatLoading } from '@/components/cat-loading';
+import { Body } from '@/components/body';
 import { Timeline } from '@/components/timeline';
 import { useNotes } from '@/hooks/useNotes';
-import { useAppStore } from '@/store/app';
-import { scrollToTop } from '@/utils/helper';
 
 export const Tag = () => {
   const { tag } = useParams<{ tag: string }>();
-  const { setTitle, setSubTitle } = useAppStore();
   const { data } = useNotes();
-
-  useEffect(() => {
-    setTitle(`包含标签“${tag}”的文章`);
-    setSubTitle(<span></span>);
-    scrollToTop();
-    return () => {
-      setTitle('');
-      setSubTitle(undefined);
-    };
-  }, [setTitle, setSubTitle, tag]);
 
   const notes = useMemo(() => {
     return (data?.notes.filter((i) => i.tags.includes(tag!)) || []).sort(
@@ -29,16 +16,8 @@ export const Tag = () => {
     );
   }, [data, tag]);
 
-  if (!data) {
-    return (
-      <div className="relative h-80 w-full">
-        <CatLoading />
-      </div>
-    );
-  }
-
   return (
-    <div className="mx-[5px] mb-5 animate-slide-up-big-in p-2 md:p-5">
+    <Body isLoading={!data} title={`包含标签“${tag}”的文章`} subTitle={<span></span>}>
       <Timeline
         data={notes.map((item) => {
           return {
@@ -62,6 +41,6 @@ export const Tag = () => {
           };
         })}
       />
-    </div>
+    </Body>
   );
 };

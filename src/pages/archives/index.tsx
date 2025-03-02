@@ -1,39 +1,17 @@
 import dayjs from 'dayjs';
-import { useEffect } from 'react';
 import { Link } from 'react-router';
 
-import { CatLoading } from '@/components/cat-loading';
+import { Body } from '@/components/body';
 import { Timeline } from '@/components/timeline';
 import { useNotes } from '@/hooks/useNotes';
-import { useAppStore } from '@/store/app';
-import { scrollToTop } from '@/utils/helper';
 
 export const Archives = () => {
   const { data, isLoading } = useNotes();
-  const { setTitle, setSubTitle } = useAppStore();
-
-  useEffect(() => {
-    setTitle('归档');
-    setSubTitle(<span></span>);
-    scrollToTop();
-    return () => {
-      setTitle('');
-      setSubTitle(undefined);
-    };
-  }, [setTitle, setSubTitle]);
-
-  if (isLoading || !data) {
-    return (
-      <div className="relative h-80 w-full">
-        <CatLoading />
-      </div>
-    );
-  }
 
   return (
-    <div className="mx-[5px] mb-5 flex animate-slide-up-big-in flex-col items-stretch p-2 md:p-5">
+    <Body isLoading={isLoading || !data} title={'归档'} subTitle={<span></span>}>
       <Timeline
-        data={data.notes
+        data={data!.notes
           .sort((a, b) => b.createdAt - a.createdAt)
           .map((item) => {
             return {
@@ -57,6 +35,6 @@ export const Archives = () => {
             };
           })}
       />
-    </div>
+    </Body>
   );
 };

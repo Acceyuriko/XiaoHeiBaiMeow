@@ -140,7 +140,7 @@ export const Sidebar = () => {
         ref={sidebarRef}
         id="sidebar"
         className={clsx(
-          'fixed right-0 top-0 z-[99] h-[100vh] w-[15rem] text-center text-grey-6',
+          'fixed right-0 top-0 z-[99] flex h-[100vh] w-[15rem] flex-col items-stretch text-center text-grey-6',
           'shadow-[0_0.375rem_0.9375rem_0.3125rem_rgba(0,0,0,0.2)]',
           'bg-grey-1',
           isSidebarOpen ? 'flex' : 'hidden lg:flex',
@@ -150,34 +150,6 @@ export const Sidebar = () => {
           transition: 'all 0.2s ease-in-out',
         }}
       >
-        <div className="absolute bottom-1 flex w-full justify-center">
-          <div
-            className="group h-[1.875rem] min-h-[1.875rem] w-[25%] cursor-pointer transition-all duration-200 ease-in-out"
-            onClick={() => {
-              anime({
-                targets: document.documentElement,
-                duration: 500,
-                easing: 'easeInOutQuad',
-                scrollTop: 0,
-              }).play();
-            }}
-          >
-            <i className="ic i-arrow-up group-hover:text-red" />
-          </div>
-          <div
-            className="group h-[1.875rem] min-h-[1.875rem] w-[25%] cursor-pointer transition-all duration-200 ease-in-out"
-            onClick={() => {
-              anime({
-                targets: document.documentElement,
-                duration: 500,
-                easing: 'easeInOutQuad',
-                scrollTop: document.documentElement.scrollHeight,
-              }).play();
-            }}
-          >
-            <i className="ic i-arrow-down group-hover:text-red" />
-          </div>
-        </div>
         <div className="no-scrollbar relative mx-auto mb-8 mt-2.5 flex h-full animate-slide-up-big-in flex-col items-center overflow-auto px-[0.9375rem] pb-2 pt-[0.875rem]">
           <div className="author group flex flex-col items-center gap-[5px]">
             <img
@@ -340,6 +312,34 @@ export const Sidebar = () => {
                 </div>
               );
             })}
+          </div>
+        </div>
+        <div className="mb-1 flex w-full justify-center">
+          <div
+            className="group h-[1.875rem] min-h-[1.875rem] w-[25%] cursor-pointer transition-all duration-200 ease-in-out"
+            onClick={() => {
+              anime({
+                targets: document.documentElement,
+                duration: 500,
+                easing: 'easeInOutQuad',
+                scrollTop: 0,
+              }).play();
+            }}
+          >
+            <i className="ic i-arrow-up group-hover:text-red" />
+          </div>
+          <div
+            className="group h-[1.875rem] min-h-[1.875rem] w-[25%] cursor-pointer transition-all duration-200 ease-in-out"
+            onClick={() => {
+              anime({
+                targets: document.documentElement,
+                duration: 500,
+                easing: 'easeInOutQuad',
+                scrollTop: document.documentElement.scrollHeight,
+              }).play();
+            }}
+          >
+            <i className="ic i-arrow-down group-hover:text-red" />
           </div>
         </div>
       </div>

@@ -11,7 +11,7 @@ export const Archives = () => {
   return (
     <Body isLoading={isLoading || !data} title={'归档'} subTitle={<span></span>}>
       <Timeline
-        data={data!.notes
+        data={(data?.notes || [])
           .sort((a, b) => b.createdAt - a.createdAt)
           .map((item) => {
             return {

@@ -1,0 +1,19 @@
+component: website
+name: website-bLz-CtXzix
+org: '1321105639'
+app: xiaoheibaimeow
+stage: prod
+inputs:
+  region: ap-shanghai
+  src:
+    exclude:
+      - .env
+    hook: pnpm run build
+    dist: ./dist
+    index: index.html
+    error: index.html
+  bucketName: my-bucket-05hemj1
+  isAutoCiDeploy: false
+  codePlatform: GITHUB
+  gitUrl: 'https://github.com/Acceyuriko/XiaoHeiBaiMeow.git'
+  branch: main

@@ -8,6 +8,15 @@ export const Footer = () => {
       <div className="">
         基于 Theme.<a href="https://github.com/amehime/hexo-theme-shoka">Shoka</a>
       </div>
+      <div className="flex items-center">
+        <a className="px-1" href="https://beian.miit.gov.cn/" target="_blank">
+          浙ICP备2025155856号
+        </a>
+        {/* <i className="ic i-sakura animate-spin text-[pink]" />
+        <a className="px-1" href="https://beian.miit.gov.cn/" target="_blank">
+          浙ICP备2025155856号
+        </a> */}
+      </div>
     </div>
   );
 };

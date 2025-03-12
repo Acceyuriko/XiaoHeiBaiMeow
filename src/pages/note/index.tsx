@@ -1,19 +1,29 @@
 import clsx from 'classnames';
 import dayjs from 'dayjs';
-import { useEffect, useMemo, useRef } from 'react';
+import React, { Suspense, useEffect, useMemo, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { Link, useNavigate, useParams } from 'react-router';
 
 import { Appreciate } from '@/components/appreciate';
 import { Body } from '@/components/body';
+import { useForceUpdate } from '@/hooks/useForceUpdate';
 import { useNotes } from '@/hooks/useNotes';
 import { COLOR_CLASSES, READING_SPEED } from '@/utils/constants';
 import { renderMarkdown, shortenNumber } from '@/utils/helper';
+
+export const MINI_PROGRAMS = [
+  {
+    id: '空开应该怎么配',
+    Component: React.lazy(() => import('@/notes-miniprogram/空开应该怎么配')),
+  },
+];
 
 export const Note = () => {
   const { title } = useParams<{ title: string }>();
   const navigate = useNavigate();
 
   const { data } = useNotes();
+  const forceUpdate = useForceUpdate();
 
   const noteRef = useRef<HTMLDivElement>(null);
 
@@ -34,7 +44,8 @@ export const Note = () => {
 
     const content = renderMarkdown(note.content, note.title);
     noteRef.current.innerHTML = content;
-  }, [note]);
+    forceUpdate();
+  }, [note, forceUpdate]);
 
   return (
     <Body
@@ -76,9 +87,7 @@ export const Note = () => {
           </Link>
         ))}
       </div>
-      <div>
-        <Appreciate />
-      </div>
+      <Appreciate />
       <div className="flex flex-col items-stretch rounded-[10px] bg-grey-2 px-8 py-4 text-[0.75em] text-grey-6 md:mx-8">
         <div>
           <i className="ic i-person mr-[5px]" />
@@ -101,6 +110,13 @@ export const Note = () => {
           </span>
         </div>
       </div>
+      {MINI_PROGRAMS.map((i) => {
+        const element = document.querySelector(`[data-miniprogram="${i.id}"]`);
+        if (element) {
+          return createPortal(<Suspense>{<i.Component />}</Suspense>, element);
+        }
+        return null;
+      })}
     </Body>
   );
 };

@@ -104,12 +104,6 @@ export const Sidebar = () => {
           },
         ],
       },
-      {
-        name: '宝库',
-        icon: <i className="ic i-th" />,
-        to: '/treasure',
-        children: [],
-      },
     ];
   }, []);
 

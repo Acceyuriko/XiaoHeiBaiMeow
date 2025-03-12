@@ -29,7 +29,6 @@ const BASE_PATH = path.join(__dirname, '../public/notes');
       title: string;
       description: string;
       createdAt: string;
-      updatedAt: string;
       tags: string[];
     } = load(metaData[1].trim());
 
@@ -37,7 +36,6 @@ const BASE_PATH = path.join(__dirname, '../public/notes');
       title: yamlData.title,
       description: yamlData.description,
       createdAt: new Date(yamlData.createdAt).getTime(),
-      updatedAt: new Date(yamlData.updatedAt).getTime(),
       cover: `/notes/${note}/cover.jpg`,
       tags: yamlData.tags,
       content,
@@ -48,7 +46,7 @@ const BASE_PATH = path.join(__dirname, '../public/notes');
     }
   }
 
-  meta.sort((a, b) => b.updatedAt - a.updatedAt);
+  meta.sort((a, b) => b.createdAt - a.createdAt);
 
   await writeFile(
     path.join(__dirname, '../public/notes.json'),

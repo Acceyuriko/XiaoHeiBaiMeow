@@ -189,16 +189,6 @@ export const Header = () => {
           },
         ],
       },
-      {
-        title: (
-          <span>
-            <i className="ic i-th mr-2" />
-            宝库
-          </span>
-        ),
-        href: '/treasure',
-        children: [],
-      },
     ];
   }, []);
 
